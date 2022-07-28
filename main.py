@@ -17,7 +17,10 @@ def home():
     return render_template('home.html', subtitle='Home Page',
                          text='This is the home page')
 
-
+@app.route("/post")
+def post():
+    return render_template('post_review.html', subtitle='Post Review', 
+                         text='This is post review page')
 
 
 
