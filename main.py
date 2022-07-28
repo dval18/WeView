@@ -22,6 +22,11 @@ def post():
     return render_template('post_review.html', subtitle='Post Review', 
                          text='This is post review page')
 
+@app.route("/register")
+def register():
+    return "<p>Register Page</p>"
+
+
 
 
 
