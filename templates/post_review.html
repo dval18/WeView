@@ -1,0 +1,80 @@
+{% extends "layout_for_post_review.html" %}
+{% block content %}
+<script>
+    function filter() {
+        const keyword = document.getElementById("in").value.toLowerCase().trim();
+        const output = document.getElementById("out");
+        for (let i = 0; i < output.length; i++) {
+            let current = output.options[i].text.toLowerCase().trim();
+            if (!current.includes(keyword)) {
+                output.options[i].style.display = 'none';
+            } else {
+                if (current !== output.options[i]) {
+                    output.options[i].style.display = 'list-item';
+                } else {
+                    output.selectedIndex = 'i';
+                }
+            }
+        }
+    }
+</script>
+<section>
+    <div class="container">
+        <a href="/home"> <!-- Right now I'm sending it to home but will send to profile -->
+            <input type="button" value="<< Back"></input>
+        </a>
+    </div>
+    <div class="container">
+        <br />
+        <br />
+        <h2>Post a Review</h2>
+
+        <div class="content-section">
+            <form method="POST" action="" style="width:50vw">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <div class="form-group">
+                        {{ form.company.label(class="form-control-label") }}
+                        {% if form.company.errors %}
+                            {{ form.company(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.company.errors%}
+                                    <span>{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.company(id="in", class="form-control form-control-lg", onkeyup="filter()", style="width:20vw; border-bottom:0px;") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.select.label(class="form-control-label") }}
+                        {{ form.select(id="out", class="form-control form-control-lg", size="10", 
+                            style="width:21vw; border-top:0px; height:30vh;", 
+                            onchange="document.getElementById('in').value=document.getElementById('out').value") }}
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        {{ form.text.label(class="form-control-label") }}
+                        {% if form.text.errors %}
+                            {{ form.text(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.text.errors%}
+                                    <span>{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.text(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <br />
+                    
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-outline-info") }}
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
