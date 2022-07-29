@@ -1,0 +1,63 @@
+{% extends "layout_for_after_login.html" %}
+{% block title %}
+<title>Reviews</title>
+{% endblock %}
+{% block content %}
+    <div class="jumbotron text-center" style="padding-top:5vh">
+        <div class="row">
+            <div class="col-8"></div>
+            <div class="col-4"><h4 style="text-align:right"><a href="/post">Post a Review</a></h4></div>
+        </div>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4"><h1>{{ title }}</h1></div>
+            <div class="col-4"></div>
+            
+        </div>
+    </div>  
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-10 jumbotron">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <div class="form-group">
+                            {{ form.company.label(class="form-control-label") }}
+                            {% if form.company.errors %}
+                                {{ form.company(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.company.errors%}
+                                        <span>{{error}}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.company(id="in", class="form-control form-control-lg", onkeyup="filter()", style="margin-bottom:0px; padding-bottom:0px; border-bottom:0px;") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.select(id="out", class="form-control form-control-lg", size="10", 
+                                style="list-style-type:None; padding-top:0px; border-top:0px; margin-top:0px; height:30vh;", 
+                                onchange="document.getElementById('in').value=document.getElementById('out').value", onchange="form.submit()") }}
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+    <div class="container">
+        {% for data in reviews %}
+            <div class="row">
+                <div class="col"></div>
+                    <div class="col-10 jumbotron">
+                        <a href="/read?id={{data['id']}}">
+                            {{data['title']}}
+                        </a>
+                        <p style="text-align:right">Company: {{data['company']}}</p>
+                    </div>
+                <div class="col"></div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -2,35 +2,10 @@
 {% block title %}
 <title>Post a Review - WeView</title>
 {% endblock %}
-{% block scripts %}
-<script>
-    function filter() {
-        const keyword = document.getElementById("in").value.toLowerCase().trim();
-        const output = document.getElementById("out");
-        //const data = document.getElementById("all_data").innerHTML.replaceAll('\'', '').replaceAll('[',"").replaceAll(']',"").split(',');
-        output.value = null;
-
-        for (let i = 0; i < output.options.length; i++) {
-            let current = output.options[i].text.toLowerCase().trim();
-            if (!current.includes(keyword)) {
-                output.options[i].style.display = 'none';
-                output.options[i].disabled = true; //Makes this program more effective on Safari (or at least ipad)
-                output.options[i].hidden = true;
-                /*Working on this- right now it keeps deleting down (type a then delete and then do b and it only 
-                shows things with a and by) so I need to figure out how to reset choices at the beginning of the 
-                function... but this is only an issue on mobile Safari so probably not super high priority
-                output.remove(i); 
-                i = i - 1;
-                */
-            } else {
-                output.options[i].style.display = 'list-item';
-                output.options[i].disabled = false;
-                output.options[i].hidden = false;
-            }
-        }
-        
-    }
-</script>
+{% block back_button %}
+<li class="nav-item">
+    <a class="nav-link" href="/reviews"><i class="fa-solid fa-angles-left"></i></a>
+</li>
 {% endblock %}
 {% block content %}
     <div class="jumbotron text-center">
