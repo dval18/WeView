@@ -1,0 +1,18 @@
+{% extends "layout_for_after_login.html" %}
+{% block title %}
+<title>{{ review['title'] }} - WeView</title>
+{% endblock %}
+{% block content %}
+    <div class="jumbotron text-center">
+        <h1>{{ review['title'] }}</h1>
+    </div>  
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-8 jumbotron"">
+                <p>{{ review['body'] }}</p>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
