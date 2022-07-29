@@ -2,6 +2,11 @@
 {% block title %}
 <title>{{ review['title'] }} - WeView</title>
 {% endblock %}
+{% block back_button %}
+<li class="nav-item">
+    <a class="nav-link" href="/reviews"><i class="fa-solid fa-angles-left"></i></a>
+</li>
+{%endblock %}
 {% block content %}
     <div class="jumbotron text-center">
         <h1>{{ review['title'] }}</h1>

@@ -22,3 +22,11 @@ class PostForm(FlaskForm):
     text = TextAreaField('Review Text',
                            validators=[DataRequired(), Length(min=10)])
     submit = SubmitField('Post Form')
+
+class SearchForm(FlaskForm):
+    company = StringField('Company')
+    
+    select = SelectField('Company', choices=[], validators=[DataRequired()])
+
+    submit = SubmitField('Search')
+
