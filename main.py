@@ -1,7 +1,9 @@
 from flask import Flask, render_template, url_for, flash, redirect, request
 from flask_behind_proxy import FlaskBehindProxy
 from flask_sqlalchemy import SQLAlchemy
-from forms import PostForm, SearchForm
+
+from forms import PostForm, SearchForm, RegistrationForm
+
 import random
 import requests
 import os
@@ -11,6 +13,7 @@ app = Flask(__name__)
 proxied = FlaskBehindProxy(app)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SECRET_KEY'] = '0336defeb890bb7bac96671c768bda2e'
+app.config['SECRET_KEY'] = '0cff8064643810cf406057022287b4c5'
 
 @app.route("/")
 @app.route("/home")
@@ -36,10 +39,15 @@ def post():
 
     return render_template('post_review.html', title='Post Form', form=form, choice_data=companies)
 
-@app.route("/register")
+
+@app.route("/register", methods=['GET', 'POST'])
 def register():
-    return render_template('register.html', subtitle='Register Page',
-                                            text='This is the register page')
+    form = RegistrationForm()
+    if form.validate_on_submit(): # checks if entries are valid
+        flash(f'Account created for {form.username.data}!', 'success')
+        return redirect(url_for('home')) # if so - send to home page
+    return render_template('register.html', title='Register', form=form)
+
 
 @app.route("/read")
 def read():
