@@ -1,36 +1,39 @@
-{% extends "layout_for_post_review.html" %}
-{% block content %}
+{% extends "layout_for_after_login.html" %}
+{% block scripts %}
 <script>
     function filter() {
         const keyword = document.getElementById("in").value.toLowerCase().trim();
         const output = document.getElementById("out");
+        
+        output.value = null;
+        
         for (let i = 0; i < output.length; i++) {
             let current = output.options[i].text.toLowerCase().trim();
             if (!current.includes(keyword)) {
                 output.options[i].style.display = 'none';
             } else {
-                if (current !== output.options[i]) {
-                    output.options[i].style.display = 'list-item';
-                } else {
-                    output.selectedIndex = 'i';
-                }
+                output.options[i].style.display = 'list-item';
             }
         }
+
+        
     }
 </script>
-<section>
-    <div class="container">
-        <a href="/home"> <!-- Right now I'm sending it to home but will send to profile -->
-            <input type="button" value="<< Back"></input>
-        </a>
+{% endblock %}
+{% block content %}
+    
+    <div class="jumbotron text-center">
+        <h1>Post a Review</h1>
     </div>
-    <div class="container">
-        <br />
-        <br />
-        <h2>Post a Review</h2>
-
-        <div class="content-section">
-            <form method="POST" action="" style="width:50vw">
+    <div class="container row">
+        <div class="col-1"></div>
+        <div class="col-2">
+            <img src="../static/styles/images/user_img.svg"></img>
+            <p style="padding-top:2vh; text-align:center;" id="username"><b>Random Name</b></p>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-8 content-section">
+            <form method="POST" action="">
                 {{ form.hidden_tag() }}
                 <fieldset class="form-group">
                     <div class="form-group">
@@ -43,13 +46,12 @@
                                 {% endfor %}
                             </div>
                         {% else %}
-                            {{ form.company(id="in", class="form-control form-control-lg", onkeyup="filter()", style="width:20vw; border-bottom:0px;") }}
+                            {{ form.company(id="in", class="form-control form-control-lg", onkeyup="filter()", style="margin-bottom:0px; padding-bottom:0px; border-bottom:0px;") }}
                         {% endif %}
                     </div>
                     <div class="form-group">
-                        {{ form.select.label(class="form-control-label") }}
                         {{ form.select(id="out", class="form-control form-control-lg", size="10", 
-                            style="width:21vw; border-top:0px; height:30vh;", 
+                            style="list-style-type:None; padding-top:0px; border-top:0px; margin-top:0px; height:30vh;", 
                             onchange="document.getElementById('in').value=document.getElementById('out').value") }}
                     </div>
                     <br />
@@ -75,6 +77,5 @@
             </form>
         </div>
     </div>
-</section>
 
 {% endblock content %}
