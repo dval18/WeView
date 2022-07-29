@@ -1,0 +1,10 @@
+{% extends "layout_for_after_login.html" %}
+{% block title %}
+<title>Error - WeView</title>
+{% endblock %}
+{% block content %}
+    <div class="jumbotron text-center" style="height:80vh">
+        <h1>{{ error_message }}</h1>
+        <p>{{ error_text }}</p>
+    </div>  
+{% endblock %}

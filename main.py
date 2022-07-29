@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, flash, redirect
+from flask import Flask, render_template, url_for, flash, redirect, request
 from flask_behind_proxy import FlaskBehindProxy
 from flask_sqlalchemy import SQLAlchemy
 from forms import PostForm
@@ -40,8 +40,21 @@ def register():
     return render_template('register.html', subtitle='Register Page',
                                             text='This is the register page')
 
+@app.route("/read")
+def read():
+    source = request.args.get('id')
+    if source is not None:
+        try:
+            # we should assign each review an id in order to grab the necessary data
+            source = int(source)  # make sure that it's an int (for id purposes)
 
-
+            # ideally we would get a review formatted like this? with any other data we think should be added
+            review = {'title':'placeholder title info', 'body':'placeholder body info'}
+            return render_template('read_review.html', review=review)
+        except ValueError:
+            return render_template('error_after_login.html', error_message='Invalid Input', error_text='Invalid or no ID entered')
+    else:
+        return render_template('error_after_login.html', error_message='Invalid Input', error_text='Invalid or no ID entered')
 
 
 if __name__ == '__main__':
