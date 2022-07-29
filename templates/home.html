@@ -5,12 +5,18 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="static/styles/carousel.css" rel="stylesheet">
         <script src="https://kit.fontawesome.com/f0332c8c95.js" crossorigin="anonymous"></script>
-        <title>Hello, world!</title>
+        <title>WeView</title>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <!--navbar-->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+              <a class="navbar-brand" href="#">
+                  <img src="static/styles/images/small_logo.png" alt="logo" width="80px" height="30px" class="d-inline-block align-top">
+              </a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
             <li class="nav-item active">
@@ -25,44 +31,53 @@
             </ul>
         </div>
         </nav>
-        
-        <div class="jumbotron text-center">
-            <h1>Interview project</h1>
-            <p>Introduction text paragraph here about getting started.</p> 
-            <br></br>
-            <a class="btn btn-dark btn-lg" href="#" role="button">Get Started</a>
+    <main role="main">
+        <div class="container-fluid" style="height: 550px;">
+            <div class="row h-100">
+                <div class="col my-auto text-center">
+                    <h1>Interview project</h1>
+                    <p>Introduction text paragraph here about getting started.</p> 
+                    <br></br>
+                    <a class="btn btn-dark btn-lg" href="#" role="button">Get Started</a>
+                </div>
+            </div>
         </div>
         
-        <div class="container marketing">
-            <div class="row">
-                <div class="col-lg-4 text-center">
-                        <i class="fa-solid fa-magnifying-glass fa-xl"></i>
-                        <h3>Step 1</h3>
-                        <p>This is your step 1 description</p>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <i class="fa-solid fa-pencil fa-xl"></i>
-                    <h3>Step 2</h3>
-                    <p>This is your step 2 description</p>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <i class="fa-solid fa-star fa-xl"></i>
-                    <h3>Step 3</h3>        
-                    <p>This is your step 3 description</p>
+        <div class="container-fluid marketing">
+            <div class="container-lg" style="height: 200px;">
+                <div class="row bg-success text-white h-100">
+                    <div class="col-lg-4 text-center my-auto">
+                            <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+                            <h3>Step 1</h3>
+                            <p>Search for the company you plan to interview with</p>
+                    </div>
+                    <div class="col-lg-4 text-center my-auto">
+                        <i class="fa-solid fa-pencil fa-xl"></i>
+                        <h3>Step 2</h3>
+                        <p>Read through previous interview experienes </p>
+                    </div>
+                    <div class="col-lg-4 text-center my-auto">
+                        <i class="fa-solid fa-star fa-xl"></i>
+                        <h3>Step 3</h3>        
+                        <p>After you interview, pay it forward and write about your own experience</p>
+                    </div>
                 </div>
             </div>
             <!--./row-->
+
             <hr class="featurette-divider">
+
+            <!--begin featurette-->
             <div class="row featurette">
-                <div class="col-md-7">
-                    <h2 class="featurette-heading"> 
-                        First Section Header. 
-                        <span class="text-muted">It’ll blow your mind.</span>
-                    </h2>
-                    <p class="lead">
-                        "This is a bunch of texting and will describe the picture to the right"
-                    </p>
-                </div>
+                        <div class="col-md-7">
+                            <h2 class="featurette-heading"> 
+                                First Section Header. 
+                                <span class="text-muted">This is optional text.</span>
+                            </h2>
+                            <p class="lead">
+                            This is a bunch of texting and will describe the picture to the right
+                            </p>
+                        </div>
                 <div class="col-md-5">
                     <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" 
                     width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" 
@@ -71,8 +86,60 @@
                         </text></svg>
                 </div>
             </div>
+
+            <hr class="featurette-divider">
+
+            <div class="row featurette">
+                <div class="col-md-7 order-md-2">
+                    <h2 class="featurette-heading"> 
+                        First Section Header. 
+                        <span class="text-muted">This is optional text.</span>
+                    </h2>
+                        <p class="lead">
+                            This is a bunch of texting and will describe the picture to the left
+                        </p>
+                </div>
+                <div class="col-md-5 order-md-1">
+                    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" 
+                    width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" 
+                    focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect 
+                    width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500
+                        </text></svg>
+                </div>
+            </div>
+            <!--./featurette-->
+            <!--last section-->
+            <div class="container" style="height: 400px;">
+                <div class="row h-100">
+                    <div class="col text-center my-auto">
+                        <h3 class="display-4">Take the guesswork out of interviews</h3>
+                        <p class="lead">Read real interview testimonials today</p>
+                            <div class="pt-3">
+                                <button type="button" class="btn btn-success btn-lg">Get Started &#8594;</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="featurette-divider">
+            
         </div>
-        
+        <!--/.container-->
+        <!--FOOTER-->
+        <footer class="container">
+            <p class="float-right">
+                <a href="#"> Back to top </a>
+            </p>
+            <p>
+                &copy; 2022 WeView Inc. &#183;
+                <a href="#"> Privacy</a>
+                &#183;
+                <a href="#"> Terms </a>
+            </p>
+        </footer>
+
+
+    </main>    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
