@@ -22,16 +22,18 @@ def home():
 def post():
     form = PostForm()
 
-    #TODO: Change this to the list of inputs from the api
-    form.select.choices = ["Placeholder text", "ab", "bc", "cd", "de", "ef", "fg", "gh", "hi", "ij", "jk", "kl", "lm", "mn", "no", 
+    form_data = ["Placeholder text", "ab", "bc", "cd", "de", "ef", "fg", "gh", "hi", "ij", "jk", "kl", "lm", "mn", "no", 
                             "op", "pq", "qr", "rs", "st", "tu", "uv", "vw", "wx", "xy", "yz"]
+
+    #TODO: Change this to the list of inputs from the api
+    form.select.choices = form_data
 
     if form.validate_on_submit():
         # company info is form.select.data
         # review data is form.text.data
         return redirect(url_for('home'))
 
-    return render_template('post_review.html', title='Post Form', form=form)
+    return render_template('post_review.html', title='Post Form', form=form, choice_data=form_data)
 
 @app.route("/register")
 def register():
