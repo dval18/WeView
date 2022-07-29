@@ -1,8 +1,5 @@
-{% extends "layout.html" %}
+{% extends "layout_for_after_login.html" %}
 {% block content %}
-    <div class="content-section">
-        <form method="POST" action="">
-            {{ form.hidden_tag() }}
-            <fieldset class="form-group">
-
-
+<h2>{{ subtitle }}</h2>    
+<p>{{ text }}</p>
+{% endblock content %}

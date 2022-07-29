@@ -35,7 +35,8 @@ def post():
 
 @app.route("/register")
 def register():
-    return "<p>Register Page</p>"
+    return render_template('register.html', subtitle='Register Page',
+                                            text='This is the register page')
 
 
 
