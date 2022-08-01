@@ -9,7 +9,7 @@
 {% endblock %}
 {% block content %}
     <div class="jumbotron text-center">
-        <h1>Post a Review</h1>
+        <h1 class="text-success">Post a Review</h1>
         <h5 style="display:none" id="all_data">{{ choice_data }}</h5>
         <h5 id="current_data"></h5>
     </div>
@@ -59,7 +59,7 @@
                     <br />
                     
                     <div class="form-group">
-                        {{ form.submit(class="btn btn-outline-info") }}
+                        {{ form.submit(class="btn btn-outline-success") }}
                     </div>
                 </fieldset>
             </form>
