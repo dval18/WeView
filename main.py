@@ -2,7 +2,7 @@ from flask import Flask, render_template, url_for, flash, redirect, request
 from flask_behind_proxy import FlaskBehindProxy
 from flask_sqlalchemy import SQLAlchemy
 
-from forms import PostForm, SearchForm, RegistrationForm
+from forms import PostForm, SearchForm, RegistrationForm, LoginForm
 
 import random
 import requests
@@ -49,6 +49,7 @@ def register():
         return redirect(url_for('home')) # if so - send to home page
     return render_template('register.html', title='Register', form=form)
 
+<<<<<<< HEAD
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 
@@ -59,6 +60,14 @@ class User(db.Model):
 
   def __repr__(self):
     return f"User('{self.username}')"
+=======
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        return redirect(url_for('home'))
+    return render_template('login.html', title="Login", form=form)
+>>>>>>> 95f5cda72258cb9b10e9e98b39f0836027e9d60b
 
 
 @app.route("/read")
