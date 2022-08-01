@@ -2,55 +2,78 @@
 {% block title %}
 <title>Login</title>
 {% endblock %}
-{% block content %}
-<div class="jumbotron text-center">
-  <h1>Login</h1>
-</div>
-
-<div class="row">
-  <div class="col"></div>
-  <div class="col-6">
-    <div class="jumbotron shadow p-3 mb-5 bg-white rounded">
-      <div class="col"></div>
-      <div class="col">
-        <form method="POST" action="">
-          {{ form.hidden_tag() }}
-          <fieldset class="form-group">
-            <div class="form-group">
-              {{ form.username.label(class="form-control-label") }}
-              {% if form.username.errors %}
-                {{ form.username(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                  {% for error in form.username.errors%}
-                    <span>{{error}}</span>
-                  {% endfor %}
-                </div>
-              {% else %}
-                {{ form.username(class="form-control form-control-lg") }}
-              {% endif %}
-            </div>
-            <div class="form-group">
-              {{ form.password.label(class="form-control-label") }}
-              {% if form.password.errors %}
-                {{ form.password(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                  {% for error in form.password.errors%}
-                    <span>{{error}}</span>
-                  {% endfor %}
-                </div>
-              {% else %}
-                {{ form.password(class="form-control form-control-lg") }}
-              {% endif %}
-            </div>
-            <div class="form-group">
-              {{ form.submit(class="btn btn-success btn-lg") }}
-            </div>
-          </fieldset>
-          </form>
-        </div>
-      <div class="col"></div>
-    </div>
+{% block nav %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/home">
+      <img src="static/styles/images/small_logo.png" alt="logo" width="80px" height="30px" class="d-inline-block align-top">
+    </a>
+    
   </div>
-  <div class="col"></div>
+</nav>
+{% endblock %}
+{% block content %}
+<br />
+<main>
+<div class="container align-middle">
+  <div class="row">
+    <div class="col"></div>
+  </div>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-4">
+      <div class="jumbotron shadow p-3 mb-5 bg-white rounded">
+        <div class="col"></div>
+        <div class="col">
+          <h1>Login</h1>
+          <p style="padding-bottom:1vh">Subtitle for login will go here </p>
+          <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+              <div class="form-group">
+                {{ form.username.label(class="form-control-label") }}
+                {% if form.username.errors %}
+                  {{ form.username(class="form-control form-control-lg is-invalid text-success") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.username.errors%}
+                      <span>{{error}}</span>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  {{ form.username(class="form-control form-control-lg text-success") }}
+                {% endif %}
+              </div>
+              <div class="form-group">
+                {{ form.password.label(class="form-control-label") }}
+                {% if form.password.errors %}
+                  {{ form.password(class="form-control form-control-lg is-invalid text-success") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.password.errors%}
+                      <span>{{error}}</span>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  {{ form.password(class="form-control form-control-lg text-success") }}
+                {% endif %}
+              </div>
+              <div class="form-group text-center" style="padding-top:1vh; padding-bottom:0px">
+                {{ form.submit(class="btn btn-success btn-lg") }}
+              </div>
+            </fieldset>
+            </form>
+          </div>
+        <div class="col"></div>
+      </div>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-4 text-center">
+      <p>New to WeView? <b><a href="/register" class="text-success">Join now!</a></b></p>
+    </div>
+    <div class="col"></div>
+  </div>
 </div>
+</main>
 {% endblock %}

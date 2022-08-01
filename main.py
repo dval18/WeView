@@ -69,6 +69,8 @@ def login():
     if form.validate_on_submit():
         return render_template('login.html', title="Login", form=form)
 
+    return render_template('login.html', title="Login", form=form)
+
 
 
 @app.route("/read")

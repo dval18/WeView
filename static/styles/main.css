@@ -1,1 +1,5 @@
-@import url("//use.fontawesome.com/releases/v5.15.3/css/all.css");
+body, html, h1, h2, h3, h4, h5, h6, 
+nav-item, btn-nav, div, li, ul, p, span,
+a, button, nav {
+    font-family: 'Lato', sans-serif;
+}
