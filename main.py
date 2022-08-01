@@ -2,7 +2,7 @@ from flask import Flask, render_template, url_for, flash, redirect, request
 from flask_behind_proxy import FlaskBehindProxy
 from flask_sqlalchemy import SQLAlchemy
 
-from forms import PostForm, SearchForm, RegistrationForm
+from forms import PostForm, SearchForm, RegistrationForm, LoginForm
 
 import random
 import requests
@@ -47,6 +47,13 @@ def register():
         flash(f'Account created for {form.username.data}!', 'success')
         return redirect(url_for('home')) # if so - send to home page
     return render_template('register.html', title='Register', form=form)
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        return redirect(url_for('home'))
+    return render_template('login.html', title="Login", form=form)
 
 
 @app.route("/read")

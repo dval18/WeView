@@ -6,27 +6,24 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
                            validators=[DataRequired(), Length(min=3, max=20)])
-    email = StringField('Email',
-                        validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',
                                      validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Sign Up')
 
 class PostForm(FlaskForm):
-
     company = StringField('Company')
-
     select = SelectField('Company', choices=[], validators=[DataRequired()])
-
     text = TextAreaField('Review Text',
                            validators=[DataRequired(), Length(min=10)])
     submit = SubmitField('Post Form')
 
 class SearchForm(FlaskForm):
     company = StringField('Company')
-    
     select = SelectField('Company', choices=[], validators=[DataRequired()])
-
     submit = SubmitField('Search')
 
+class LoginForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(min=3, max=20)])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Login')
