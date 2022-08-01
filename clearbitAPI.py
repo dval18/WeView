@@ -22,22 +22,22 @@ def clearbitInformation(domain_input):
     domain = domain_output['domain']
 
     company = clearbit.Company.find(domain=domain,stream=True)
-    pprint.pprint(company)
+    #pprint.pprint(company)
 
     clearbit_duplicates = []
     clearbit_list = ["tags", "linkedin"]
-    print("--------------------------------------------------------------")
+    #print("--------------------------------------------------------------")
 
 
     for company_tag in company:
         if company_tag in clearbit_list:
             if company_tag == "linkedin":
                 linkedin_extracted = company[company_tag] ["handle"]
-                if linkedin_extracted == None:
-                    continue
-                else:
+                if isinstance(company[company_tag], str):
                     company_linkedin = "https://www.linkedin.com/" + linkedin_extracted
                     clearbit_info[company_tag] = company_linkedin
+                else:
+                    clearbit_info[company_tag] = "None provided"
             else:
                 clearbit_info[company_tag] = company[company_tag]
         elif isinstance(company[company_tag], dict) and company[company_tag] not in clearbit_duplicates:
@@ -57,7 +57,8 @@ def clearbitInformation(domain_input):
 
     return clearbit_info
 
-
+'''
 domain = input("Enter Company name: ")
 domainInfomration = clearbitInformation(domain)
 pprint.pprint(domainInfomration)
+'''
