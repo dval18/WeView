@@ -15,6 +15,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SECRET_KEY'] = '0336defeb890bb7bac96671c768bda2e'
 app.config['SECRET_KEY'] = '0cff8064643810cf406057022287b4c5'
 
+
 @app.route("/")
 @app.route("/home")
 def home():
@@ -47,6 +48,17 @@ def register():
         flash(f'Account created for {form.username.data}!', 'success')
         return redirect(url_for('home')) # if so - send to home page
     return render_template('register.html', title='Register', form=form)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+db = SQLAlchemy(app)
+
+class User(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  username = db.Column(db.String(20), unique=True, nullable=False)
+  password = db.Column(db.String(60), nullable=False)
+
+  def __repr__(self):
+    return f"User('{self.username}')"
 
 
 @app.route("/read")
