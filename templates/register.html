@@ -2,6 +2,26 @@
 {% block title %}
 <title>Register</title>
 {% endblock %}
+{% block nav %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    {% block back_button %}
+                    {% endblock %}
+                    <li>   </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/reviews">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Log In</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+{% endblock %}
 {% block content %}
 <div class="jumbotron text-center">
   <h1>Register</h1>
