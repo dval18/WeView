@@ -3,87 +3,91 @@
 <title>Register</title>
 {% endblock %}
 {% block nav %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    {% block back_button %}
-                    {% endblock %}
-                    <li>   </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/reviews">Reviews</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Log In</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/home">
+      <img src="static/styles/images/small_logo.png" alt="logo" width="80px" height="30px" class="d-inline-block align-top">
+    </a>
+  </div>
+</nav>
 {% endblock %}
 {% block content %}
-<div class="jumbotron text-center">
-  <h1>Register</h1>
-</div>
-
-<div class="row">
-  <div class="col"></div>
-  <div class="col-8">
-    <div class="jumbotron">
+<div class="jumbotron" style="height:90vh">
+  <div class="container align-middle">
+    <div class="row">
       <div class="col"></div>
-      <div class="col">
-        <form method="POST" action="">
-          {{ form.hidden_tag() }}
-          <fieldset class="form-group">
-            <div class="form-group">
-              {{ form.username.label(class="form-control-label") }}
-              {% if form.username.errors %}
-                {{ form.username(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                  {% for error in form.username.errors%}
-                    <span>{{error}}</span>
-                  {% endfor %}
+      <div class="col-4" style="padding-bottom:1vh">
+        <h2 class="text-center">Register</h2>
+      </div>
+      <div class="col"></div>
+    </div>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-4">
+        <div class="jumbotron shadow p-3 mb-5 bg-white rounded">
+          <div class="col"></div>
+          <div class="col">
+            <form method="POST" action="">
+              {{ form.hidden_tag() }}
+              <fieldset class="form-group">
+                <div class="form-group">
+                  {{ form.username.label(class="form-control-label") }}
+                  {% if form.username.errors %}
+                    {{ form.username(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.username.errors%}
+                        <span>{{error}}</span>
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    {{ form.username(class="form-control form-control-lg") }}
+                  {% endif %}
                 </div>
-              {% else %}
-                {{ form.username(class="form-control form-control-lg") }}
-              {% endif %}
-            </div>
-            <div class="form-group">
-              {{ form.password.label(class="form-control-label") }}
-              {% if form.password.errors %}
-                {{ form.password(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                  {% for error in form.password.errors%}
-                    <span>{{error}}</span>
-                  {% endfor %}
+                <div class="form-group">
+                  {{ form.password.label(class="form-control-label") }}
+                  {% if form.password.errors %}
+                    {{ form.password(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.password.errors%}
+                        <span>{{error}}</span>
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    {{ form.password(class="form-control form-control-lg") }}
+                  {% endif %}
                 </div>
-              {% else %}
-                {{ form.password(class="form-control form-control-lg") }}
-              {% endif %}
-            </div>
-            <div class="form-group">
-              {{ form.confirm_password.label(class="form-control-label") }}
-              {% if form.confirm_password.errors %}
-                {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                  {% for error in form.confirm_password.errors%}
-                    <span>{{error}}</span>
-                  {% endfor %}
+                <div class="form-group">
+                  {{ form.confirm_password.label(class="form-control-label") }}
+                  {% if form.confirm_password.errors %}
+                    {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                      {% for error in form.confirm_password.errors%}
+                        <span>{{error}}</span>
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    {{ form.confirm_password(class="form-control form-control-lg") }}
+                  {% endif %}
                 </div>
-              {% else %}
-                {{ form.confirm_password(class="form-control form-control-lg") }}
-              {% endif %}
-            </div>
-            <div class="form-group">
-              {{ form.submit(class="btn btn-outline-info") }}
-            </div>
-          </fieldset>
-          </form>
+                <div class="form-group text-center" style="padding-top:1vh">
+                  {{ form.submit(class="btn btn-success") }}
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <div class="col"></div>
         </div>
+      </div>
+      <div class="col"></div>
+    </div>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-4 text-center">
+        <p>Already on WeView? <b><a href="/login" class="text-success">Sign In</a></b></p>
+      </div>
       <div class="col"></div>
     </div>
   </div>
-  <div class="col"></div>
 </div>
+
 {% endblock %}
