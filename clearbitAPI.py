@@ -75,13 +75,13 @@ def clearbitInformation(domain_input):
         if company_tag in clearbit_info and clearbit_info[company_tag] != "":
             clearbit_duplicates.append(company_tag)
     
-    columns = ["industry", "description", "domain", "legalName", "linkedin", "location", "logo", "employees", "employeesRange", "name", "tags"]
+    categories = ["industry", "description", "domain", "legalName", "linkedin", "location", "logo", "employees", "employeesRange", "name", "tags"]
 
-    clearbit_Dataframe = pd.DataFrame.from_dict(clearbit_info)
-    engine = db.create_engine('sqlite:///clearbitAPITable.dbf')
-    clearbit_Dataframe.to_sql('results',con = engine,if_exists = 'replace',index = False)
+    clearbit_Dataframe = pd.DataFrame.from_records(clearbit_info, columns = categories)
+    engine = db.create_engine('sqlite:///clearbitAPITable.db')
+    clearbit_Dataframe.to_sql('clearbit_results',con = engine,if_exists = 'replace',index = False)
 
-    query = engine.execute('SELECT * FROM results;').fetchall()
+    query = engine.execute('SELECT * FROM clearbit_results;').fetchall()
     print(pd.DataFrame(query))
 
     return clearbit_info
@@ -89,6 +89,6 @@ def clearbitInformation(domain_input):
 
 domain = input("Enter Company name: ")
 domainInfomration = clearbitInformation(domain)
-#pprint.pprint(domainInfomration)
+pprint.pprint(domainInfomration)
 
 
