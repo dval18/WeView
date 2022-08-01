@@ -13,7 +13,7 @@ app = Flask(__name__)
 proxied = FlaskBehindProxy(app)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SECRET_KEY'] = '0336defeb890bb7bac96671c768bda2e'
-app.config['SECRET_KEY'] = '0cff8064643810cf406057022287b4c5'
+#app.config['SECRET_KEY'] = '0cff8064643810cf406057022287b4c5'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
@@ -55,6 +55,9 @@ def post():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit(): # checks if entries are valid
+        user = User(username=form.username.data, password=form.password.data)
+        db.session.add(user)
+        db.session.commit() 
         flash(f'Account created for {form.username.data}!', 'success')
         return redirect(url_for('home')) # if so - send to home page
     return render_template('register.html', title='Register', form=form)
@@ -64,8 +67,7 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        return redirect(url_for('home'))
-    return render_template('login.html', title="Login", form=form)
+        return render_template('login.html', title="Login", form=form)
 
 
 
