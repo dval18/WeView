@@ -15,6 +15,16 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SECRET_KEY'] = '0336defeb890bb7bac96671c768bda2e'
 app.config['SECRET_KEY'] = '0cff8064643810cf406057022287b4c5'
 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+db = SQLAlchemy(app)
+
+class User(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  username = db.Column(db.String(20), unique=True, nullable=False)
+  password = db.Column(db.String(60), nullable=False)
+
+  def __repr__(self):
+    return f"User('{self.username}')"
 
 @app.route("/")
 @app.route("/home")
@@ -49,25 +59,14 @@ def register():
         return redirect(url_for('home')) # if so - send to home page
     return render_template('register.html', title='Register', form=form)
 
-<<<<<<< HEAD
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-db = SQLAlchemy(app)
 
-class User(db.Model):
-  id = db.Column(db.Integer, primary_key=True)
-  username = db.Column(db.String(20), unique=True, nullable=False)
-  password = db.Column(db.String(60), nullable=False)
-
-  def __repr__(self):
-    return f"User('{self.username}')"
-=======
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
         return redirect(url_for('home'))
     return render_template('login.html', title="Login", form=form)
->>>>>>> 95f5cda72258cb9b10e9e98b39f0836027e9d60b
+
 
 
 @app.route("/read")
