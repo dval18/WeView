@@ -3,24 +3,37 @@ import pprint
 
 clearbit.key = 'sk_111170e184f1f4a664b677009250e622'
 
+'''
 def clearbitCompaniesList():
-    companies = clearbit.Discovery.search(query={'tech':'marketo'}, sort='score')
 
-    pprint.pprint(companies)
+    companies = []
+
+    i = 1
+    companies_search = clearbit.Discovery.search(query={'tech':'marketo'}, sort='alexa_asc', page= i)
+    companies_search_size = companies_search["total"]
+    
+    
+    while i <= companies_search_size:
+        companies_search = clearbit.Discovery.search(query={'tech':'marketo'}, sort='alexa_asc', page= i)
+        for company in companies_search["results"]:
+            print(company['name'])
+        i += 1
+'''
+        
 
 def clearbitInformation(domain_input):
     clearbit_info = {
-    "industry": "", 
-    "description": "", 
-    "domain": "", 
-    "legalName": "",
-    "linkedin": "", 
-    "location": "", 
-    "logo": "", 
-    "employees": "", 
-    "employeesRange": "", 
-    "name": "", 
-    "tags": ""
+        "industry": "", 
+        "description": "", 
+        "domain": "", 
+        "legalName": "",
+        "linkedin": "", 
+        "location": "", 
+        "logo": "", 
+        "employees": "", 
+        "employeesRange": "", 
+        "name": "", 
+        "tags": ""
     }
 
     domain_output = clearbit.NameToDomain.find(name=domain_input)
@@ -62,10 +75,9 @@ def clearbitInformation(domain_input):
 
     return clearbit_info
 
-'''
+
 domain = input("Enter Company name: ")
 domainInfomration = clearbitInformation(domain)
 pprint.pprint(domainInfomration)
-'''
 
-clearbitCompaniesList()
+
