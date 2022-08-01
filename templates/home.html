@@ -14,22 +14,34 @@
     <body>
         <!--navbar-->
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-              <a class="navbar-brand" href="#">
-                  <img src="static/styles/images/small_logo.png" alt="logo" width="80px" height="30px" class="d-inline-block align-top">
-              </a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-            </li>
-            </ul>
-        </div>
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="static/styles/images/small_logo.png" alt="logo" width="80px" height="30px" class="d-inline-block align-top">
+                </a>
+                <div class="collapse navbar-collapse justify-content-between">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/home">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Pricing</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav me-auto mb-2 mb-md-0">
+                        <li>
+                            <div class="btn-nav mr-1"><a class="btn btn-outline-light btn-small navbar-btn" href="/login">Login</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="btn-nav"><a class="btn btn-light btn-small navbar-btn" href="/register">Get Started</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     <main role="main">
         <div class="container-fluid" style="height: 550px;">
@@ -44,7 +56,7 @@
         </div>
         
         <div class="container-fluid marketing">
-            <div class="container-lg" style="height: 200px;">
+            <div class="container-lg mb-5" style="height: 200px;">
                 <div class="row bg-success text-white h-100">
                     <div class="col-lg-4 text-center my-auto">
                             <i class="fa-solid fa-magnifying-glass fa-xl"></i>
@@ -65,10 +77,10 @@
             </div>
             <!--./row-->
 
-            <hr class="featurette-divider">
+            
 
             <!--begin featurette-->
-            <div class="row featurette">
+            <div class="row featurette mt-5">
                         <div class="col-md-7">
                             <h2 class="featurette-heading"> 
                                 First Section Header. 
