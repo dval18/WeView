@@ -6,7 +6,7 @@ clearbit.key = 'sk_111170e184f1f4a664b677009250e622'
 def clearbitCompaniesList():
     companies = clearbit.Discovery.search(query={'tech':'marketo'}, sort='score')
 
-    print(companies)
+    pprint.pprint(companies)
 
 def clearbitInformation(domain_input):
     clearbit_info = {
