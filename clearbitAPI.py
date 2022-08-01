@@ -1,5 +1,7 @@
 import clearbit
 import pprint
+import pandas as pd
+import sqlalchemy as db
 
 clearbit.key = 'sk_111170e184f1f4a664b677009250e622'
 
@@ -72,12 +74,21 @@ def clearbitInformation(domain_input):
 
         if company_tag in clearbit_info and clearbit_info[company_tag] != "":
             clearbit_duplicates.append(company_tag)
+    
+    columns = ["industry", "description", "domain", "legalName", "linkedin", "location", "logo", "employees", "employeesRange", "name", "tags"]
+
+    clearbit_Dataframe = pd.DataFrame.from_dict(clearbit_info)
+    engine = db.create_engine('sqlite:///clearbitAPITable.dbf')
+    clearbit_Dataframe.to_sql('results',con = engine,if_exists = 'replace',index = False)
+
+    query = engine.execute('SELECT * FROM results;').fetchall()
+    print(pd.DataFrame(query))
 
     return clearbit_info
 
 
 domain = input("Enter Company name: ")
 domainInfomration = clearbitInformation(domain)
-pprint.pprint(domainInfomration)
+#pprint.pprint(domainInfomration)
 
 
