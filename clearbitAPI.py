@@ -33,8 +33,11 @@ def clearbitInformation(domain_input):
         if company_tag in clearbit_list:
             if company_tag == "linkedin":
                 linkedin_extracted = company[company_tag] ["handle"]
-                company_linkedin = "https://www.linkedin.com/" + linkedin_extracted
-                clearbit_info[company_tag] = company_linkedin
+                if linkedin_extracted == None:
+                    continue
+                else:
+                    company_linkedin = "https://www.linkedin.com/" + linkedin_extracted
+                    clearbit_info[company_tag] = company_linkedin
             else:
                 clearbit_info[company_tag] = company[company_tag]
         elif isinstance(company[company_tag], dict) and company[company_tag] not in clearbit_duplicates:
@@ -54,8 +57,7 @@ def clearbitInformation(domain_input):
 
     return clearbit_info
 
-'''
+
 domain = input("Enter Company name: ")
 domainInfomration = clearbitInformation(domain)
 pprint.pprint(domainInfomration)
-'''
