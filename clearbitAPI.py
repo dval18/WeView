@@ -5,22 +5,14 @@ import sqlalchemy as db
 
 clearbit.key = 'sk_111170e184f1f4a664b677009250e622'
 
-'''
-def clearbitCompaniesList():
 
-    companies = []
+def CompaniesList():
 
-    i = 1
-    companies_search = clearbit.Discovery.search(query={'tech':'marketo'}, sort='alexa_asc', page= i)
-    companies_search_size = companies_search["total"]
-    
-    
-    while i <= companies_search_size:
-        companies_search = clearbit.Discovery.search(query={'tech':'marketo'}, sort='alexa_asc', page= i)
-        for company in companies_search["results"]:
-            print(company['name'])
-        i += 1
-'''
+    companies = ['Amazon', 'NVIDIA', 'Intel', 'Apple', 'Microsoft', 'HBO Max', 'Netflix', 'Nintendo', 'Sony', 'Google', 'Dell', 'Facebook', 'HP']
+
+    return companies
+
+
         
 
 def clearbitInformation(domain_input):
