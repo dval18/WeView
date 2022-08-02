@@ -3,6 +3,7 @@ from flask_behind_proxy import FlaskBehindProxy
 from flask_sqlalchemy import SQLAlchemy
 from forms import PostForm, SearchForm, RegistrationForm, LoginForm
 from flask_bcrypt import Bcrypt
+from clearbitAPI import CompaniesList, clearbitInformation
 
 import random
 import requests
@@ -39,8 +40,7 @@ def post():
     form = PostForm()
 
     # List of all companies
-    companies = ["Placeholder text", "ab", "bc", "cd", "de", "ef", "fg", "gh", "hi", "ij", "jk", "kl", "lm", "mn", "no", 
-                            "op", "pq", "qr", "rs", "st", "tu", "uv", "vw", "wx", "xy", "yz"]
+    companies = CompaniesList()
 
     #TODO: Change this to the list of inputs from the api
     form.select.choices = companies
@@ -96,8 +96,7 @@ def reviews():
     form = SearchForm()
 
     #list of all companies
-    companies = ["Placeholder text", "ab", "bc", "cd", "de", "ef", "fg", "gh", "hi", "ij", "jk", "kl", "lm", "mn", "no", 
-                            "op", "pq", "qr", "rs", "st", "tu", "uv", "vw", "wx", "xy", "yz"]
+    companies = CompaniesList()
 
     form.select.choices = companies
 
@@ -113,14 +112,17 @@ def reviews():
     if form.validate_on_submit():
         #reviews is where I'll send the reviews that correspond to the chosen company
         to_send = []
-
         for i in range(len(all_revs)):
             if form.select.data == all_revs[i]['company']:
                 to_send.append(all_revs[i])
+        img = clearbitInformation(form.select.data)
+        print(img.keys())
+        img_info = img["logo"]
+        print(img_info)
 
-        return render_template('reviews.html', form=form, reviews=to_send, title=f'{form.select.data} Reviews')
+        return render_template('reviews.html', form=form, reviews=to_send, title=f'{form.select.data} Reviews', img_url=img_info)
 
-    return render_template('reviews.html', form=form, reviews=all_revs, title="All Reviews")
+    return render_template('reviews.html', form=form, reviews=all_revs, title="All Reviews", img_url="../static/styles/images/logo_dark.jpeg")
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")

@@ -15,6 +15,7 @@ class RegistrationForm(FlaskForm):
 class PostForm(FlaskForm):
     company = StringField('Company')
     select = SelectField('Company', choices=[], validators=[DataRequired()])
+    title = StringField('Title', validators=[DataRequired()])
     text = TextAreaField('Review Text',
                            validators=[DataRequired(), Length(min=10)])
     submit = SubmitField('Post Form')

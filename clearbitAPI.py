@@ -79,8 +79,8 @@ def clearbitInformation(domain_input):
     return clearbit_info
 
 
-domain = input("Enter Company name: ")
-domainInfomration = clearbitInformation(domain)
-pprint.pprint(domainInfomration)
+#domain = input("Enter Company name: ")
+#domainInfomration = clearbitInformation(domain)
+#pprint.pprint(domainInfomration)
 
 
