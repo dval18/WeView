@@ -32,6 +32,7 @@ class User(db.Model):
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50))
+    job_title = db.Column(db.String(50))
     response = db.Column(db.Text())
     company_id = db.Column(db.String(50), db.ForeignKey('company.id'),
         nullable=False)
@@ -63,7 +64,7 @@ def post():
         # company info is form.select.data
         # title is form.title.data
         # review data is form.text.data
-        review = Review(title=form.title.data, response=form.text.data, company_id=form.select.data)
+        review = Review(title=form.title.data, job_title=form.job_title.data, response=form.text.data, company_id=form.select.data)
         db.session.add(review)
         db.session.commit()
         return redirect(url_for('reviews'))
@@ -126,12 +127,9 @@ def reviews():
     if form.validate_on_submit():
                 
         reviews = Review.query.filter_by(company_id=form.select.data).all()
-        print(reviews)
 
         img = clearbitInformation(form.select.data)
-        print(img.keys())
         img_info = img["logo"]
-        print(img_info)
 
         return render_template('reviews.html', form=form, reviews=reviews, title=f'{form.select.data} Reviews', img_url=img_info)
 
