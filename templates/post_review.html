@@ -45,7 +45,7 @@
                             <div style="border:1px solid ; border-radius:5px;" class="text-success">
                                 <div class="form-group" style="padding-bottom:0px; margin-bottom:0px;">
                                     {% if form.company.errors %}
-                                        {{ form.company(class="form-control form-control-lg is-invalid", placeholder="Type in name of company and select below") }}
+                                        {{ form.company(id="in", class="form-control form-control-lg is-invalid", placeholder="Type in name of company and select below") }}
                                         <div class="invalid-feedback">
                                             {% for error in form.company.errors%}
                                                 <span>{{error}}</span>
@@ -57,7 +57,7 @@
                                 </div>
                                 <div class="form-group" style="padding-bottom:0px; margin-bottom:0px;">
                                     {{ form.select(id="out", class="form-control form-control-lg", size="10", 
-                                        style="list-style-type:None; padding-top:0px; border-top:0px; margin-top:0px; height:30vh;", 
+                                        style="list-style-type:None; padding-top:0px; border-top:0px; margin-top:0px;", 
                                         onchange="document.getElementById('in').value=document.getElementById('out').value") }}
                                 </div>
                             </div>
@@ -78,7 +78,24 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                {{ form.text.label(class="form-control-label text-dark") }}
+
+                                {{ form.job_title.label(class="form-control-label text-success")}}
+                                <div style="border:1px solid; border-radius:5px;" class="text-success">
+                                    {% if form.job_title.errors %}
+                                        {{ form.job_title(class="form-control form-control-lg is-invalid") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.title.errors%}
+                                                <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form.job_title(class="form-control form-control-lg") }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form.text.label(class="form-control-label text-success") }}
+
                                 <div style="border:1px solid; border-radius:5px;" class="text-success">
                                     {% if form.text.errors %}
                                         {{ form.text(class="form-control form-control-lg is-invalid") }}

@@ -1,6 +1,6 @@
 {% extends "layout_for_after_login.html" %}
 {% block title %}
-<title>{{ review['title'] }} - WeView</title>
+<title>{{ review.title }} - WeView</title>
 {% endblock %}
 
 {% block navbar %}
@@ -30,14 +30,21 @@
             <div class="row">
                 <div class="col"></div>
                 <div class="col-9">
-                    <h1>{{ review['title'] }}</h1>
+                    <h1>{{ review.title }}</h1>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-9">
+                    <h4>Job Position: {{ review.job_title }}
                 </div>
                 <div class="col"></div>
             </div>
             <div class="row" style="padding-top:5vh">
                 <div class="col"></div>
                 <div class="col-9">
-                    <p>{{ review['body'] }}</p>
+                    <p>{{ review.response }}</p>
                 </div>
                 <div class="col"></div>
             </div>

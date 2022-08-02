@@ -57,7 +57,7 @@
                         </div>
                         <div class="form-group" style="padding-bottom:0px; margin-bottom:0px;">
                             {{ form.select(id="out", class="form-control form-control-lg", size="10", 
-                                style="list-style-type:None; padding-top:0px; border-top:0px; margin-top:0px; height:30vh;", 
+                                style="list-style-type:None; padding-top:0px; border-top:0px; margin-top:0px;", 
                                 onchange="document.getElementById('in').value=document.getElementById('out').value", onchange="form.submit()") }}
                         </div>
                         </div>
@@ -74,12 +74,13 @@
                     <div class="col-8 jumbotron">
                         <b>
                             <h4>
-                                <a href="/read?id={{data['id']}}" class="text-success">
-                                    {{data['title']}}
+                                <a href="/read?id={{data.id}}" class="text-success">
+                                    {{data.title}}
                                 </a>
                             </h4>
                         </b>
-                        <p style="text-align:left">Company: {{data['company']}}</p>
+                        <p style="text-align:left">Company: {{data.company_id}}</p>
+                        <p style="text-align:right">Job Title: {{data.job_title}}</p>
                     </div>
                 <div class="col"></div>
             </div>
