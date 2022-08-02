@@ -2,43 +2,62 @@
 {% block title %}
 <title>Reviews</title>
 {% endblock %}
+{% block navbar %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/home">
+      <img src="static/styles/images/small_logo.png" alt="logo" width="80px" height="30px" class="d-inline-block align-top">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Logout</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <b><a class="nav-link text-success" href="/post">Post a Review</a></b>
+            </li>
+        </ul>
+        
+    </div>
+</div>
+</nav>
+{% endblock %}
 {% block content %}
-    <div class="jumbotron text-center" style="padding-top:5vh">
-        <div class="row">
-            <div class="col-8"></div>
-            <div class="col-4"><h4 style="text-align:right"><a href="/post">Post a Review</a></h4></div>
-        </div>
+    <div class="jumbotron text-center" style="padding-top:5vh; margin-top:5.7vh;">
         <div class="row">
             <div class="col-4"></div>
             <div class="col-4"><h1>{{ title }}</h1></div>
             <div class="col-4"></div>
-            
         </div>
     </div>  
     <div class="container">
         <div class="row">
             <div class="col"></div>
-            <div class="col-10 jumbotron">
+            <div class="col-11 jumbotron bg-light">
                 <form method="POST" action="">
                     {{ form.hidden_tag() }}
                     <fieldset class="form-group">
-                        <div class="form-group">
-                            {{ form.company.label(class="form-control-label") }}
+                        {{ form.company.label(class="form-control-label") }}
+                        <div style="border:1px solid ; border-radius:5px;" class="text-success">
+                        <div class="form-group" style="padding-bottom:0px; margin-bottom:0px;">
                             {% if form.company.errors %}
-                                {{ form.company(class="form-control form-control-lg is-invalid") }}
+                                {{ form.company(class="form-control form-control-lg is-invalid", placeholder="Type in name of company and select below") }}
                                 <div class="invalid-feedback">
                                     {% for error in form.company.errors%}
                                         <span>{{error}}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.company(id="in", class="form-control form-control-lg", onkeyup="filter()", style="margin-bottom:0px; padding-bottom:0px; border-bottom:0px;") }}
+                                {{ form.company(id="in", class="form-control form-control-lg", onkeyup="filter()", placeholder="Type in name of company and select below", style="margin-bottom:0px; padding-bottom:0px; border-bottom:0px;") }}
                             {% endif %}
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="padding-bottom:0px; margin-bottom:0px;">
                             {{ form.select(id="out", class="form-control form-control-lg", size="10", 
                                 style="list-style-type:None; padding-top:0px; border-top:0px; margin-top:0px; height:30vh;", 
                                 onchange="document.getElementById('in').value=document.getElementById('out').value", onchange="form.submit()") }}
+                        </div>
                         </div>
                     </fieldset>
                 </form>
@@ -50,11 +69,15 @@
         {% for data in reviews %}
             <div class="row">
                 <div class="col"></div>
-                    <div class="col-10 jumbotron">
-                        <a href="/read?id={{data['id']}}">
-                            {{data['title']}}
-                        </a>
-                        <p style="text-align:right">Company: {{data['company']}}</p>
+                    <div class="col-8 jumbotron">
+                        <b>
+                            <h4>
+                                <a href="/read?id={{data['id']}}" class="text-success">
+                                    {{data['title']}}
+                                </a>
+                            </h4>
+                        </b>
+                        <p style="text-align:left">Company: {{data['company']}}</p>
                     </div>
                 <div class="col"></div>
             </div>
