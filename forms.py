@@ -18,7 +18,7 @@ class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     text = TextAreaField('Review Text',
                            validators=[DataRequired(), Length(min=10)])
-    submit = SubmitField('Post Form')
+    submit = SubmitField('Submit')
 
 class SearchForm(FlaskForm):
     company = StringField('Company')

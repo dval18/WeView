@@ -28,10 +28,10 @@
 <div class="row">
     <div class="col"></div>
     <div class="col-9">
-        <div class="jumbotron text-success shadow p-3 mb-5 bg-white rounded" style="background-color:White; border:2px solid; margin-top:5vh">
+        <div class="jumbotron border border-success shadow p-3 mb-5 bg-white rounded" style="background-color:White; border:2px solid; margin-top:5vh">
             <div class="row">
                 <div class="col text-center">
-                    <h1 class="text-success">Post a Review</h1>
+                    <h1>Post a Review</h1>
                     <h5 style="display:none" id="all_data">{{ choice_data }}</h5>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                     <form method="POST" action="">
                         {{ form.hidden_tag() }}
                         <fieldset class="form-group">
-                            {{ form.company.label(class="form-control-label text-success")}}
+                            {{ form.company.label(class="form-control-label text-dark")}}
                             <div style="border:1px solid ; border-radius:5px;" class="text-success">
                                 <div class="form-group" style="padding-bottom:0px; margin-bottom:0px;">
                                     {% if form.company.errors %}
@@ -63,7 +63,7 @@
                             </div>
                             <br />
                             <div class="form-group">
-                                {{ form.title.label(class="form-control-label text-success")}}
+                                {{ form.title.label(class="form-control-label text-dark")}}
                                 <div style="border:1px solid; border-radius:5px;" class="text-success">
                                     {% if form.title.errors %}
                                         {{ form.title(class="form-control form-control-lg is-invalid") }}
@@ -78,7 +78,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                {{ form.text.label(class="form-control-label text-success") }}
+                                {{ form.text.label(class="form-control-label text-dark") }}
                                 <div style="border:1px solid; border-radius:5px;" class="text-success">
                                     {% if form.text.errors %}
                                         {{ form.text(class="form-control form-control-lg is-invalid") }}
