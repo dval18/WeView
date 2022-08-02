@@ -29,6 +29,21 @@ class User(db.Model):
   def __repr__(self):
     return f"User('{self.username}')"
 
+class Review(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    response = db.Column(db.Text())
+    company_id = db.Column(db.String(50), db.ForeignKey('company.id'),
+        nullable=False)
+    
+    def __repr__(self):
+        response = {'id':self.id, 'title':self.title, 'body':self.response, 'company':self.company_id}
+        return str(response)
+
+class Company(db.Model):
+    id = db.Column(db.String(50), primary_key=True)
+    reviews = db.relationship("Review", backref="company", lazy=True)
+
 @app.route("/")
 @app.route("/home")
 def home():
@@ -38,7 +53,6 @@ def home():
 @app.route("/post", methods=['GET','POST'])
 def post():
     form = PostForm()
-
     # List of all companies
     companies = CompaniesList()
 
@@ -47,7 +61,11 @@ def post():
 
     if form.validate_on_submit():
         # company info is form.select.data
+        # title is form.title.data
         # review data is form.text.data
+        review = Review(title=form.title.data, response=form.text.data, company_id=form.select.data)
+        db.session.add(review)
+        db.session.commit()
         return redirect(url_for('reviews'))
 
     return render_template('post_review.html', title='Post Form', form=form, choice_data=companies)
@@ -84,12 +102,15 @@ def read():
             source = int(source)  # make sure that it's an int (for id purposes)
 
             # ideally we would get a review formatted like this? with any other data we think should be added
-            review = {'title':'placeholder title info', 'body':'placeholder body info'}
+            review = Review.query.filter_by(id=source).first()
+            print(review)
+            #review = {'title':'placeholder title info', 'body':'placeholder body info'}
             return render_template('read_review.html', review=review)
         except ValueError:
             return render_template('error_after_login.html', error_message='Invalid Input', error_text='Invalid or no ID entered')
     else:
         return render_template('error_after_login.html', error_message='Invalid Input', error_text='Invalid or no ID entered')
+
 
 @app.route("/reviews", methods=['GET','POST'])
 def reviews():
@@ -100,27 +121,19 @@ def reviews():
 
     form.select.choices = companies
 
-    all_revs = []
-
-    # mock data of all reviews for this page
-    # will want a list of dictionaries {id:id, title:title}
-    # at least for the actual review part
-    for i in range(len(companies)):
-        whole = {'id':i, 'title':'Dummy Title', 'company':companies[i]}
-        all_revs.append(whole)
+    all_revs = Review.query.all()
 
     if form.validate_on_submit():
-        #reviews is where I'll send the reviews that correspond to the chosen company
-        to_send = []
-        for i in range(len(all_revs)):
-            if form.select.data == all_revs[i]['company']:
-                to_send.append(all_revs[i])
+                
+        reviews = Review.query.filter_by(company_id=form.select.data).all()
+        print(reviews)
+
         img = clearbitInformation(form.select.data)
         print(img.keys())
         img_info = img["logo"]
         print(img_info)
 
-        return render_template('reviews.html', form=form, reviews=to_send, title=f'{form.select.data} Reviews', img_url=img_info)
+        return render_template('reviews.html', form=form, reviews=reviews, title=f'{form.select.data} Reviews', img_url=img_info)
 
     return render_template('reviews.html', form=form, reviews=all_revs, title="All Reviews", img_url="../static/styles/images/logo_dark.jpeg")
 
