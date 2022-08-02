@@ -2,68 +2,93 @@
 {% block title %}
 <title>Post a Review - WeView</title>
 {% endblock %}
-{% block back_button %}
-<li class="nav-item">
-    <a class="nav-link" href="/reviews"><i class="fa-solid fa-angles-left"></i></a>
-</li>
-{% endblock %}
-{% block content %}
-    <div class="jumbotron text-center">
-        <h1>Post a Review</h1>
-        <h5 style="display:none" id="all_data">{{ choice_data }}</h5>
-        <h5 id="current_data"></h5>
-    </div>
-    <div class="container row">
-        <div class="col-1"></div>
-        <div class="col-2">
-            <img src="../static/styles/images/user_img.svg"></img>
-            <p style="padding-top:2vh; text-align:center;" id="username"><b>Random Name</b></p>
-        </div>
-        <div class="col-1"></div>
-        <div class="col-8 content-section">
-            <form method="POST" action="">
-                {{ form.hidden_tag() }}
-                <fieldset class="form-group">
-                    <div class="form-group">
-                        {{ form.company.label(class="form-control-label") }}
-                        {% if form.company.errors %}
-                            {{ form.company(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.company.errors%}
-                                    <span>{{error}}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.company(id="in", class="form-control form-control-lg", onkeyup="filter()", style="margin-bottom:0px; padding-bottom:0px; border-bottom:0px;") }}
-                        {% endif %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.select(id="out", class="form-control form-control-lg", size="10", 
-                            style="list-style-type:None; padding-top:0px; border-top:0px; margin-top:0px; height:30vh;", 
-                            onchange="document.getElementById('in').value=document.getElementById('out').value") }}
-                    </div>
-                    <br />
-                    <div class="form-group">
-                        {{ form.text.label(class="form-control-label") }}
-                        {% if form.text.errors %}
-                            {{ form.text(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.text.errors%}
-                                    <span>{{error}}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.text(class="form-control form-control-lg") }}
-                        {% endif %}
-                    </div>
-                    <br />
-                    
-                    <div class="form-group">
-                        {{ form.submit(class="btn btn-outline-info") }}
-                    </div>
-                </fieldset>
-            </form>
-        </div>
-    </div>
 
+{% block navbar %}
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/home">
+      <img src="static/styles/images/small_logo.png" alt="logo" width="80px" height="30px" class="d-inline-block align-top">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/reviews">Reviews</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Logout</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col"></div>
+    <div class="col-9">
+        <div class="jumbotron text-success shadow p-3 mb-5 bg-white rounded" style="background-color:White; border:2px solid; margin-top:5vh">
+            <div class="row">
+                <div class="col text-center">
+                    <h1 class="text-success">Post a Review</h1>
+                    <h5 style="display:none" id="all_data">{{ choice_data }}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-10">
+                    <form method="POST" action="">
+                        {{ form.hidden_tag() }}
+                        <fieldset class="form-group">
+                            {{ form.company.label(class="form-control-label text-success")}}
+                            <div style="border:1px solid ; border-radius:5px;" class="text-success">
+                                <div class="form-group" style="padding-bottom:0px; margin-bottom:0px;">
+                                    {% if form.company.errors %}
+                                        {{ form.company(class="form-control form-control-lg is-invalid", placeholder="Type in name of company and select below") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.company.errors%}
+                                                <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form.company(id="in", class="form-control form-control-lg", onkeyup="filter()", placeholder="Type in name of company and select below", style="margin-bottom:0px; padding-bottom:0px; border-bottom:0px;") }}
+                                    {% endif %}
+                                </div>
+                                <div class="form-group" style="padding-bottom:0px; margin-bottom:0px;">
+                                    {{ form.select(id="out", class="form-control form-control-lg", size="10", 
+                                        style="list-style-type:None; padding-top:0px; border-top:0px; margin-top:0px; height:30vh;", 
+                                        onchange="document.getElementById('in').value=document.getElementById('out').value") }}
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                {{ form.text.label(class="form-control-label text-success") }}
+                                <div style="border:1px solid; border-radius:5px;" class="text-success">
+                                    {% if form.text.errors %}
+                                        {{ form.text(class="form-control form-control-lg is-invalid") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.text.errors%}
+                                                <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form.text(class="form-control form-control-lg") }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <br />
+                    
+                            <div class="form-group">
+                                {{ form.submit(class="btn btn-outline-success") }}
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col"></div>
+</div>
 {% endblock content %}
