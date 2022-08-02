@@ -12,82 +12,89 @@
 </nav>
 {% endblock %}
 {% block content %}
-<div class="jumbotron" style="height:90vh">
-  <div class="container align-middle">
-    <div class="row">
-      <div class="col"></div>
-      <div class="col-4" style="padding-bottom:1vh">
-        <h2 class="text-center">Register</h2>
-      </div>
-      <div class="col"></div>
-    </div>
-    <div class="row">
-      <div class="col"></div>
-      <div class="col-4">
-        <div class="jumbotron shadow p-3 mb-5 bg-white rounded">
+      <div class="container-fluid align-items-center bg-light pb-4 pt-5">
+        <div class="row">
           <div class="col"></div>
-          <div class="col">
-            <form method="POST" action="">
-              {{ form.hidden_tag() }}
-              <fieldset class="form-group">
-                <div class="form-group">
-                  {{ form.username.label(class="form-control-label") }}
-                  {% if form.username.errors %}
-                    {{ form.username(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                      {% for error in form.username.errors%}
-                        <span>{{error}}</span>
-                      {% endfor %}
+          <div class="col-6" style="padding-bottom:1vh">
+            <h2 class="text-center">Make the most of your interview</h2>
+          </div>
+          <div class="col"></div>
+        </div>
+        <div class="row">
+          <div class="col"></div>
+          <div class="col-4">
+            <div class="shadow p-3 mb-5 bg-white rounded">
+              <div class="col"></div>
+              <div class="col">
+                <form method="POST" action="">
+                  {{ form.hidden_tag() }}
+                  <fieldset class="form-group">
+                    <div class="form-group">
+                      {{ form.username.label(class="form-control-label") }}
+                      {% if form.username.errors %}
+                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                          {% for error in form.username.errors%}
+                            <span>{{error}}</span>
+                          {% endfor %}
+                        </div>
+                      {% else %}
+                        {{ form.username(class="form-control form-control-lg") }}
+                      {% endif %}
                     </div>
-                  {% else %}
-                    {{ form.username(class="form-control form-control-lg") }}
-                  {% endif %}
-                </div>
-                <div class="form-group">
-                  {{ form.password.label(class="form-control-label") }}
-                  {% if form.password.errors %}
-                    {{ form.password(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                      {% for error in form.password.errors%}
-                        <span>{{error}}</span>
-                      {% endfor %}
+                    <div class="form-group">
+                      {{ form.password.label(class="form-control-label") }}
+                      {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                          {% for error in form.password.errors%}
+                            <span>{{error}}</span>
+                          {% endfor %}
+                        </div>
+                      {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                      {% endif %}
                     </div>
-                  {% else %}
-                    {{ form.password(class="form-control form-control-lg") }}
-                  {% endif %}
-                </div>
-                <div class="form-group">
-                  {{ form.confirm_password.label(class="form-control-label") }}
-                  {% if form.confirm_password.errors %}
-                    {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                      {% for error in form.confirm_password.errors%}
-                        <span>{{error}}</span>
-                      {% endfor %}
+                    <div class="form-group">
+                      {{ form.confirm_password.label(class="form-control-label") }}
+                      {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                          {% for error in form.confirm_password.errors%}
+                            <span>{{error}}</span>
+                          {% endfor %}
+                        </div>
+                      {% else %}
+                        {{ form.confirm_password(class="form-control form-control-lg") }}
+                      {% endif %}
                     </div>
-                  {% else %}
-                    {{ form.confirm_password(class="form-control form-control-lg") }}
-                  {% endif %}
-                </div>
-                <div class="form-group text-center" style="padding-top:1vh">
-                  {{ form.submit(class="btn btn-success") }}
-                </div>
-              </fieldset>
-            </form>
+                    <div class="form-group text-center" style="padding-top:1vh">
+                      {{ form.submit(class="btn btn-success") }}
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+              <div class="col"></div>
+            </div>
+          </div>
+          <div class="col"></div>
+        </div>
+        <div class="row">
+          <div class="col"></div>
+          <div class="col-4 text-center">
+            <p>Already on WeView? <b><a href="/login" class="text-success">Sign In</a></b></p>
           </div>
           <div class="col"></div>
         </div>
       </div>
-      <div class="col"></div>
-    </div>
-    <div class="row">
-      <div class="col"></div>
-      <div class="col-4 text-center">
-        <p>Already on WeView? <b><a href="/login" class="text-success">Sign In</a></b></p>
-      </div>
-      <div class="col"></div>
-    </div>
-  </div>
-</div>
+<!--FOOTER-->
+<footer class="container">
+    <p>
+        &copy; 2022 WeView Inc. &#183;
+        <a href="#"> Privacy</a>
+        &#183;
+        <a href="#"> Terms </a>
+    </p>
+        </footer>
 
 {% endblock %}
