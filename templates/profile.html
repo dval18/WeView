@@ -1,0 +1,76 @@
+{% extends "layout_for_after_login.html" %}
+{% block title %}
+<title>{{ username }} - WeView</title>
+{% endblock %}
+{% block navbar %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/home">
+      <img src="static/styles/images/small_logo.png" alt="logo" width="80px" height="30px" class="d-inline-block align-top">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/reviews">Reviews</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout {{ username }}</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</nav>
+{% endblock %}
+{% block content %}
+<div class="jumbotron text-center">
+    <h1>{{ username }}'s Profile Page</h1>
+</div>
+<div class="container">
+    <div class="container">
+        <h3>My Reviews </h3>
+        {% for data in reviews %}
+            <div class="row h-100">
+                <div class="col my-3"></div>
+                    <div class="col-8 bg-light shadow p-3 mb-5 border border-secondary">
+                        <b>
+                            <h4>
+                                <a href="/read?id={{data.id}}" class="text-success">
+                                    {{data.title}}
+                                </a>
+                            </h4>
+                        </b>
+                        <p style="text-align:left">Company: {{data.company_id}}</p>
+                        <p style="text-align:right">Job Title: {{data.job_title}}</p>
+                    </div>
+                <div class="col"></div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="container">
+        <h3>My Comments</h3>
+        {% for data in comments %}
+            <div class="row h-100">
+                <div class="col my-3"></div>
+                    <div class="col-8 bg-light shadow p-3 mb-5 border border-secondary">
+                        <p> {{ data.response }}</p>
+                        <b>
+                            <p>
+                                <a href="/read?id={{data.review_id}}" class="text-success">
+                                    Click here to check out the review
+                                </a>
+                            <p>
+                        </b>
+                    </div>
+                <div class="col"></div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+    <!--FOOTER-->
+<footer class="container">
+      <p>
+          &copy; 2022 WeView Inc. &#183;
+          <a href="https://linktr.ee/weviewteam" target="_blank">Connect</a>
+      </p>
+  </footer>
+{% endblock %}
