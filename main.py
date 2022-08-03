@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, flash, redirect, request, session
 from flask_behind_proxy import FlaskBehindProxy
 from flask_sqlalchemy import SQLAlchemy
-from forms import PostForm, SearchForm, RegistrationForm, LoginForm
+from forms import PostForm, SearchForm, RegistrationForm, LoginForm, CommentForm
 from flask_bcrypt import Bcrypt
 from clearbitAPI import CompaniesList, clearbitInformation
 import functools
@@ -26,7 +26,8 @@ class User(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   username = db.Column(db.String(20), unique=True, nullable=False)
   password = db.Column(db.String(60), nullable=False)
-
+  comments = db.relationship("Comment", backref="user", lazy=True)
+  reviews = db.relationship("Review", backref="user", lazy=True)
   def __repr__(self):
     return f"User('{self.username}')"
 
@@ -37,9 +38,24 @@ class Review(db.Model):
     response = db.Column(db.Text())
     company_id = db.Column(db.String(50), db.ForeignKey('company.id'),
         nullable=False)
+    comments = db.relationship("Comment", backref="review", lazy=True)
+    username = db.Column(db.String(20), db.ForeignKey('user.username'), 
+        nullable=False)
     
     def __repr__(self):
         response = {'id':self.id, 'title':self.title, 'body':self.response, 'company':self.company_id}
+        return str(response)
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    response = db.Column(db.Text())
+    review_id = db.Column(db.String(50), db.ForeignKey('review.id'), 
+        nullable=False)
+    username = db.Column(db.String(20), db.ForeignKey('user.username'), 
+        nullable=False)
+    
+    def __repr__(self):
+        response = {'id':self.id, 'response':self.response, 'review':self.review_id}
         return str(response)
 
 class Company(db.Model):
@@ -74,19 +90,17 @@ def post():
     form = PostForm()
     # List of all companies
     companies = CompaniesList()
-
-    #TODO: Change this to the list of inputs from the api
     form.select.choices = companies
 
     if form.validate_on_submit():
         # company info is form.select.data
         # title is form.title.data
         # review data is form.text.data
-        review = Review(title=form.title.data, job_title=form.job_title.data, response=form.text.data, company_id=form.select.data)
+        review = Review(title=form.title.data, username=session["username"], job_title=form.job_title.data, response=form.text.data, company_id=form.select.data)
         db.session.add(review)
         db.session.commit()
         return redirect(url_for('reviews'))
-
+    
     return render_template('post_review.html', user=session['username'], title='Post Form', form=form, choice_data=companies)
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -128,22 +142,26 @@ def logout():
     session.clear()
     return redirect(url_for("home"))
 
-@app.route("/read")
+@app.route("/read", methods=['GET','POST'])
 @login_required
 def read():
     source = request.args.get('id')
-    if source is not None:
-        try:
-            # we should assign each review an id in order to grab the necessary data
-            source = int(source)  # make sure that it's an int (for id purposes)
+    if source is not None and source.isnumeric():
+        review = Review.query.filter_by(id=source).first()
+        comment_form = CommentForm()
 
-            # ideally we would get a review formatted like this? with any other data we think should be added
-            review = Review.query.filter_by(id=source).first()
-            print(review)
-            #review = {'title':'placeholder title info', 'body':'placeholder body info'}
-            return render_template('read_review.html', user=session['username'], review=review)
-        except ValueError:
-            return render_template('error_after_login.html', error_message='Invalid Input', error_text='Invalid or no ID entered')
+        if comment_form.validate_on_submit():
+            comment = Comment(response=comment_form.text.data, review_id=review.id, username=session["username"])
+            db.session.add(comment)
+            db.session.commit()
+            comments = Comment.query.filter_by(review_id=review.id).all()
+            if review.username == session['username']:
+                return render_template('read_review.html', user=session['username'], review=review, form=comment_form, comments=comments)
+            else:
+                return render_template('read_review.html', user=session['username'], review=review, form=comment_form, comments=comments)
+        else:    
+            comments = Comment.query.filter_by(review_id=review.id).all()
+            return render_template('read_review.html', user=session['username'], review=review, form=comment_form, comments=comments)
     else:
         return render_template('error_after_login.html', error_message='Invalid Input', error_text='Invalid or no ID entered')
 

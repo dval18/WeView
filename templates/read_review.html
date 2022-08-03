@@ -52,4 +52,65 @@
     </div>
     <div class="col"></div>
 </div>
+<div class="row">
+    <div class="col"></div>
+    <div class="col-7">
+        <div class="jumbotron text-center bg-white" style="border:1px solid green; padding-bottom:0vh; padding-top:5vh">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-10">
+                    <form method="POST" action="">
+                        {{ form.hidden_tag() }}
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                {{ form.text.label(class="form-control-label text-dark") }}
+                                <div style="border:1px solid; border-radius:5px;" class="text-success">
+                                    {% if form.text.errors %}
+                                        {{ form.text(class="form-control form-control-lg is-invalid") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.text.errors%}
+                                                <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form.text(class="form-control form-control-lg") }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                {{ form.submit(class="btn btn-outline-success") }}
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="col"></div>
+            </div>
+            {% for comment in comments %}
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col-10">
+                        <div class="jumbotron text-center bg-white" style="border:1px solid green; padding:0vh;">
+                            {% if review.username == comment.username %}
+                                <div class="row">
+                                    <div class="col-4"><b>Original Poster</b></div>
+                                    <div class="col" style="text-align:left">{{ comment.response }}</div>
+                                </div>
+                            {% else %}
+                                <div class="row">
+                                    <div class="col-4"></div>
+                                    <div class="col" style="text-align:left">
+                                        {{ comment.response }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col"></div>
+</div>
 {% endblock %}
