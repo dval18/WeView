@@ -10,8 +10,8 @@ colorama==0.4.4
 configparser==5.0.2
 crayons==0.4.0
 cryptography==2.1.4
-cycler
-dataclasses==0.7
+cycler==0.10.0
+dataclasses==0.5
 DistUtilsExtra
 dnspython==2.1.0
 email-validator==1.1.3
