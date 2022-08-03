@@ -9,12 +9,18 @@
       <img src="static/styles/images/small_logo.png" alt="logo" width="80px" height="30px" class="d-inline-block align-top">
     </a>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ml-auto mb-2 mb-md-0">
             <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout {{ user }}</a>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ user }}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/logout">Sign Out</a>
+                        <a class="dropdown-item" href="">Profile</a>
+                    </div>
+                </div>
             </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <b><a class="nav-link text-success" href="/post">Post a Review</a></b>
             </li>
@@ -23,7 +29,7 @@
     </div>
 </div>
 </nav>
-{% endblock %}
+{% endblock %}g
 {% block content %}
     <div class="jumbotron text-center my-auto">
         <div class="row align-items-center">
@@ -71,7 +77,7 @@
         {% for data in reviews %}
             <div class="row h-100">
                 <div class="col my-3"></div>
-                    <div class="col-8 bg-light shadow p-3 mb-5 border border-secondary">
+                    <div class="col-8 bg-light shadow p-3 mb-5 border border-light">
                         <b>
                             <h4>
                                 <a href="/read?id={{data.id}}" class="text-success">
