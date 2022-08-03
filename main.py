@@ -93,13 +93,17 @@ def post():
 @is_logged_in
 def register():
     form = RegistrationForm()
-    if form.validate_on_submit(): # checks if entries are valid
+    existing_users_with_username = User.query.filter_by(username=form.username.data).all()
+    if form.validate_on_submit() and len(existing_users_with_username) == 0: # checks if entries are valid
         pw_hash = bcrypt.generate_password_hash(form.password.data)
         user = User(username=form.username.data, password=pw_hash)
         db.session.add(user)
         db.session.commit() 
         flash(f'Account created for {form.username.data}!', 'success')
-        return redirect(url_for('login')) # if so - send to home page
+        return redirect(url_for('login'))
+    elif len(existing_users_with_username) != 0:
+        flash(f'Account already exists for {form.username.data}', 'success')
+        return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
 
