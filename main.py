@@ -75,21 +75,27 @@ def post():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit(): # checks if entries are valid
-        user = User(username=form.username.data, password=form.password.data)
-        pw_hash = bcrypt.generate_password_hash('password').decode('utf-8')
+        pw_hash = bcrypt.generate_password_hash(form.password.data)
+        user = User(username=form.username.data, password=pw_hash)
         db.session.add(user)
         db.session.commit() 
         flash(f'Account created for {form.username.data}!', 'success')
-        return redirect(url_for('home')) # if so - send to home page
+        return redirect(url_for('login')) # if so - send to home page
     return render_template('register.html', title='Register', form=form)
 
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    
     if form.validate_on_submit():
-        return render_template('login.html', title="Login", form=form)
-
+        user = User.query.filter_by(username=form.username.data).first()
+        if user:
+            #print(user.password)
+            if bcrypt.check_password_hash(user.password, form.password.data):
+                print("hei")
+                return redirect(url_for('home')) #render_template('home.html', title="Login",form=form)
+        
     return render_template('login.html', title="Login", form=form)
 
 
