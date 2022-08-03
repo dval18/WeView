@@ -67,8 +67,8 @@ six
 SpeechRecognition
 SQLAlchemy
 ssh-import-id
-toml==0.10.2
-Turbo-Flask==0.6.0
+toml
+Turbo-Flask
 typing-extensions==3.10.0.0
 ubuntu-advantage-tools==27.9
 unattended-upgrades==0.1
