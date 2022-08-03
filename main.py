@@ -103,6 +103,12 @@ def post():
     
     return render_template('post_review.html', user=session['username'], title='Post Form', form=form, choice_data=companies)
 
+@app.route("/profile")
+@login_required
+def profile():
+    user = User.query.filter_by(username=session['username']).first()
+    return render_template('profile.html', username=user.username, reviews=user.reviews, comments=user.comments)
+
 @app.route("/register", methods=['GET', 'POST'])
 @is_logged_in
 def register():
@@ -132,7 +138,7 @@ def login():
             if bcrypt.check_password_hash(user.password, form.password.data):
                 print("hei")
                 session['username'] = user.username
-                return redirect(url_for('reviews'))
+                return redirect(url_for('profile'))
         
     return render_template('login.html', title="Login", form=form)
 
