@@ -25,12 +25,12 @@
 </nav>
 {% endblock %}
 {% block content %}
-    <div class="jumbotron text-center" style="padding-top:5vh; margin-top:5.7vh;">
-        <div class="row">
+    <div class="jumbotron text-center my-auto">
+        <div class="row align-items-center">
             <div class="col-4">
                 <img src="{{ img_url }}" alt="{{ title }} logo url: {{ img_url }}" style="mix-blend-mode:multiply; max-height:100vh; max-width:15vw"></img>
             </div>
-            <div class="col-4"><h1>{{ title }}</h1></div>
+            <div class="col-4"><h1 class="display-light">{{ title }}</h1></div>
             <div class="col-4"></div>
         </div>
     </div>  
@@ -69,9 +69,9 @@
     </div>
     <div class="container">
         {% for data in reviews %}
-            <div class="row">
-                <div class="col"></div>
-                    <div class="col-8 jumbotron">
+            <div class="row h-100">
+                <div class="col my-3"></div>
+                    <div class="col-8 bg-light shadow p-3 mb-5 border border-secondary">
                         <b>
                             <h4>
                                 <a href="/read?id={{data.id}}" class="text-success">
@@ -86,4 +86,11 @@
             </div>
         {% endfor %}
     </div>
+    <!--FOOTER-->
+<footer class="container">
+      <p>
+          &copy; 2022 WeView Inc. &#183;
+          <a href="https://linktr.ee/weviewteam" target="_blank">Connect</a>
+      </p>
+  </footer>
 {% endblock %}

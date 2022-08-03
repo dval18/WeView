@@ -184,5 +184,6 @@ def reviews():
 
     return render_template('reviews.html', user=session['username'], form=form, reviews=all_revs, title="All Reviews", img_url="../static/styles/images/logo_dark.jpeg")
 
+
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
