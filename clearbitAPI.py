@@ -8,7 +8,7 @@ clearbit.key = 'sk_111170e184f1f4a664b677009250e622'
 
 def CompaniesList():
 
-    companies = ['Amazon', 'NVIDIA', 'Intel', 'Apple', 'Microsoft', 'HBO Max', 'Netflix', 'Nintendo', 'Sony', 'Google', 'Dell', 'Facebook', 'HP']
+    companies = ['Adobe', 'Amazon', 'Apple', 'Cisco', 'Dell', 'Doordash', 'Dropbox', 'Facebook', 'Google', 'HBO Max', 'HP', 'IBM', 'Intel', 'Lenovo', 'Microsoft', 'Netflix', 'Nintendo', 'NVIDIA', 'Oracle', 'Salesforce', 'Snap', 'Sony', 'Uber']
 
     return companies
 
