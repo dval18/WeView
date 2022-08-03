@@ -1,14 +1,13 @@
-import clearbit
 import pprint
 import pandas as pd
 import sqlalchemy as db
+import requests
 
-clearbit.key = 'sk_111170e184f1f4a664b677009250e622'
 
 
 def CompaniesList():
 
-    companies = ['Amazon', 'NVIDIA', 'Intel', 'Apple', 'Microsoft', 'HBO Max', 'Netflix', 'Nintendo', 'Sony', 'Google', 'Dell', 'Facebook', 'HP']
+    companies = ['Adobe', 'Amazon', 'Apple', 'Cisco', 'Dell', 'Doordash', 'Dropbox', 'Facebook', 'Google', 'HBO Max', 'HP', 'IBM', 'Intel', 'Lenovo', 'Microsoft', 'Netflix', 'Nintendo', 'NVIDIA', 'Oracle', 'Salesforce', 'Snap', 'Sony', 'Uber']
 
     return companies
 
@@ -16,6 +15,8 @@ def CompaniesList():
         
 
 def clearbitInformation(domain_input):
+    CLEARBIT_TOKEN = 'sk_b5291d8bbeddea820b1603e2cd7b309e'
+
     clearbit_info = {
         "industry": "", 
         "description": "", 
@@ -29,12 +30,16 @@ def clearbitInformation(domain_input):
         "name": "", 
         "tags": ""
     }
+    
+    headers = {'Authorization': 'Bearer {token}'.format(token=CLEARBIT_TOKEN)}
 
-    domain_output = clearbit.NameToDomain.find(name=domain_input)
+    clearbit_NameToDomainURL = f"https://company.clearbit.com/v1/domains/find?name=:{domain_input}"
+
+    domain_output = requests.get(clearbit_NameToDomainURL, headers=headers).json()
     domain = domain_output['domain']
 
-    company = clearbit.Company.find(domain=domain,stream=True)
-    #pprint.pprint(company)
+    company_url = "https://company.clearbit.com/v2/companies/find?domain=" + domain
+    company = requests.get(company_url, headers=headers).json()
 
     clearbit_duplicates = []
     clearbit_list = ["tags", "linkedin"]
@@ -69,13 +74,16 @@ def clearbitInformation(domain_input):
     
     categories = ["industry", "description", "domain", "legalName", "linkedin", "location", "logo", "employees", "employeesRange", "name", "tags"]
 
+
     clearbit_Dataframe = pd.DataFrame.from_records(clearbit_info, columns = categories)
     engine = db.create_engine('sqlite:///clearbitAPITable.db')
     clearbit_Dataframe.to_sql('clearbit_results',con = engine,if_exists = 'replace',index = False)
 
+    '''
     query = engine.execute('SELECT * FROM clearbit_results;').fetchall()
-    print(pd.DataFrame(query))
-
+    print(pd.DataFrame(query)) 
+    '''
+    
     return clearbit_info
 
 

@@ -90,6 +90,8 @@ def post():
     form = PostForm()
     # List of all companies
     companies = CompaniesList()
+    companies.insert(0, "")
+    
     form.select.choices = companies
 
     if form.validate_on_submit():
@@ -99,9 +101,16 @@ def post():
         review = Review(title=form.title.data, username=session["username"], job_title=form.job_title.data, response=form.text.data, company_id=form.select.data)
         db.session.add(review)
         db.session.commit()
+        flash('Review posted!', 'success')
         return redirect(url_for('reviews'))
     
     return render_template('post_review.html', user=session['username'], title='Post Form', form=form, choice_data=companies)
+
+@app.route("/profile")
+@login_required
+def profile():
+    user = User.query.filter_by(username=session['username']).first()
+    return render_template('profile.html', username=user.username, reviews=user.reviews, comments=user.comments)
 
 @app.route("/register", methods=['GET', 'POST'])
 @is_logged_in
@@ -116,7 +125,7 @@ def register():
         flash(f'Account created for {form.username.data}!', 'success')
         return redirect(url_for('login'))
     elif len(existing_users_with_username) != 0:
-        flash(f'Account already exists for {form.username.data}', 'success')
+        flash(f'Account already exists for {form.username.data}', 'failure')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
@@ -132,14 +141,16 @@ def login():
             if bcrypt.check_password_hash(user.password, form.password.data):
                 print("hei")
                 session['username'] = user.username
-                return redirect(url_for('reviews'))
+                return redirect(url_for('profile'))
         
     return render_template('login.html', title="Login", form=form)
 
 @app.route("/logout")
 @login_required
 def logout():
+    user = session["username"]
     session.clear()
+    flash(f'{user} is logged out!', 'success')
     return redirect(url_for("home"))
 
 @app.route("/read", methods=['GET','POST'])
@@ -155,6 +166,7 @@ def read():
             db.session.add(comment)
             db.session.commit()
             comments = Comment.query.filter_by(review_id=review.id).all()
+            flash(f'Review posted!', 'success')
             if review.username == session['username']:
                 return render_template('read_review.html', user=session['username'], review=review, form=comment_form, comments=comments)
             else:
@@ -173,6 +185,8 @@ def reviews():
 
     #list of all companies
     companies = CompaniesList()
+    companies.insert(0, "")
+
     form.select.choices = companies
     all_revs = Review.query.all()
 
