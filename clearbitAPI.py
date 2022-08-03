@@ -7,7 +7,7 @@ import requests
 
 def CompaniesList():
 
-    companies = ['Amazon', 'NVIDIA', 'Intel', 'Apple', 'Microsoft', 'HBO Max', 'Netflix', 'Nintendo', 'Sony', 'Google', 'Dell', 'Facebook', 'HP']
+    companies = ['Adobe', 'Amazon', 'Apple', 'Cisco', 'Dell', 'Doordash', 'Dropbox', 'Facebook', 'Google', 'HBO Max', 'HP', 'IBM', 'Intel', 'Lenovo', 'Microsoft', 'Netflix', 'Nintendo', 'NVIDIA', 'Oracle', 'Salesforce', 'Snap', 'Sony', 'Uber']
 
     return companies
 
@@ -79,9 +79,10 @@ def clearbitInformation(domain_input):
     engine = db.create_engine('sqlite:///clearbitAPITable.db')
     clearbit_Dataframe.to_sql('clearbit_results',con = engine,if_exists = 'replace',index = False)
 
+    '''
     query = engine.execute('SELECT * FROM clearbit_results;').fetchall()
     print(pd.DataFrame(query)) 
-
+    '''
     
     return clearbit_info
 
