@@ -74,12 +74,10 @@ def clearbitInformation(domain_input):
     
     categories = ["industry", "description", "domain", "legalName", "linkedin", "location", "logo", "employees", "employeesRange", "name", "tags"]
 
-
+    '''
     clearbit_Dataframe = pd.DataFrame.from_records(clearbit_info, columns = categories)
     engine = db.create_engine('sqlite:///clearbitAPITable.db')
     clearbit_Dataframe.to_sql('clearbit_results',con = engine,if_exists = 'replace',index = False)
-
-    '''
     query = engine.execute('SELECT * FROM clearbit_results;').fetchall()
     print(pd.DataFrame(query)) 
     '''
