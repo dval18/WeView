@@ -2,8 +2,9 @@ import clearbit
 import pprint
 import pandas as pd
 import sqlalchemy as db
+import requests
 
-clearbit.key = 'sk_111170e184f1f4a664b677009250e622'
+clearbit.key = 'sk_b5291d8bbeddea820b1603e2cd7b309e'
 
 
 def CompaniesList():
@@ -29,7 +30,17 @@ def clearbitInformation(domain_input):
         "name": "", 
         "tags": ""
     }
+    
+    HEADERS = {
+        'apiKey': 'sk_b5291d8bbeddea820b1603e2cd7b309e'
+    }
 
+    """
+    clearbit_NameToDomainURL = "https://company.clearbit.com/v1/domains/find?name=:" + domain_input
+    response = requests.get(clearbit_NameToDomainURL, headers=HEADERS)
+    print(response)
+
+    """
     domain_output = clearbit.NameToDomain.find(name=domain_input)
     domain = domain_output['domain']
 
@@ -76,6 +87,7 @@ def clearbitInformation(domain_input):
     query = engine.execute('SELECT * FROM clearbit_results;').fetchall()
     print(pd.DataFrame(query))
 
+    
     return clearbit_info
 
 
