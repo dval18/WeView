@@ -182,6 +182,10 @@ def reviews():
         img_info = img["logo"]
         return render_template('reviews.html', user=session['username'], form=form, reviews=reviews, title=f'{form.select.data} Reviews', img_url=img_info)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 07d5b18ec01bdecd842d40a66df737e34f904f65
     return render_template('reviews.html', user=session['username'], form=form, reviews=all_revs, title="All Reviews", img_url="../static/styles/images/logo_dark.jpeg")
 
 
