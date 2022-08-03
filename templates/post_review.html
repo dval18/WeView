@@ -15,8 +15,18 @@
             <li class="nav-item">
                 <a class="nav-link" href="/reviews">Reviews</a>
             </li>
+        </ul>
+        <ul class="navbar-nav ml-auto mb-2 mb-md-0">
             <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout {{ user }}</a>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ user }}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/logout">Sign Out</a>
+                        <a class="dropdown-item" href="">Profile</a>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
@@ -42,7 +52,7 @@
                         {{ form.hidden_tag() }}
                         <fieldset class="form-group">
                             {{ form.company.label(class="form-control-label text-dark")}}
-                            <div style="border:1px solid ; border-radius:5px;" class="text-success">
+                            <div style="border:1px solid ; border-radius:5px;" class="text-light">
                                 <div class="form-group" style="padding-bottom:0px; margin-bottom:0px;">
                                     {% if form.company.errors %}
                                         {{ form.company(id="in", class="form-control form-control-lg is-invalid", placeholder="Type in name of company and select below") }}
@@ -64,7 +74,7 @@
                             <br />
                             <div class="form-group">
                                 {{ form.title.label(class="form-control-label text-dark")}}
-                                <div style="border:1px solid; border-radius:5px;" class="text-success">
+                                <div style="border:1px solid; border-radius:5px;" class="text-light">
                                     {% if form.title.errors %}
                                         {{ form.title(class="form-control form-control-lg is-invalid") }}
                                         <div class="invalid-feedback">
@@ -80,7 +90,7 @@
                             <div class="form-group">
 
                                 {{ form.job_title.label(class="form-control-label text-dark")}}
-                                <div style="border:1px solid; border-radius:5px;" class="text-success">
+                                <div style="border:1px solid; border-radius:5px;" class="text-light">
                                     {% if form.job_title.errors %}
                                         {{ form.job_title(class="form-control form-control-lg is-invalid") }}
                                         <div class="invalid-feedback">
@@ -95,7 +105,7 @@
                             </div>
                             <div class="form-group">
                                 {{ form.text.label(class="form-control-label text-dark") }}
-                                <div style="border:1px solid; border-radius:5px;" class="text-success">
+                                <div style="border:1px solid; border-radius:5px;" class="text-light">
                                     {% if form.text.errors %}
                                         {{ form.text(class="form-control form-control-lg is-invalid") }}
                                         <div class="invalid-feedback">
@@ -110,7 +120,7 @@
                             </div>
                             <br />
                             <div class="form-group">
-                                {{ form.submit(class="btn btn-outline-success") }}
+                                {{ form.submit(class="btn btn-success") }}
                             </div>
                         </fieldset>
                     </form>
