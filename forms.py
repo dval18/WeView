@@ -21,6 +21,11 @@ class PostForm(FlaskForm):
                            validators=[DataRequired(), Length(min=10)])
     submit = SubmitField('Submit')
 
+class CommentForm(FlaskForm):
+    text = TextAreaField('Comment Here!',
+                           validators=[DataRequired()])
+    submit = SubmitField('Post Comment')
+
 class SearchForm(FlaskForm):
     company = StringField('Company')
     select = SelectField('Company', choices=[], validators=[DataRequired()])
