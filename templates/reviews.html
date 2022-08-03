@@ -11,10 +11,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout {{ user }}</a>
+                <a class="nav-link" href="/logout">Logout</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/profile">{{ user }}'s Profile</a>
+            </li>
             <li class="nav-item">
                 <b><a class="nav-link text-success" href="/post">Post a Review</a></b>
             </li>
