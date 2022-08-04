@@ -19,13 +19,13 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SECRET_KEY'] = '0336defeb890bb7bac96671c768bda2e'
 #app.config['SECRET_KEY'] = '0cff8064643810cf406057022287b4c5'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://dmwoungxyevtki:df8dfd830957227ab0eb8ba2b03efee4223d2d7c10d4f067c3b07aa277194b8b@ec2-52-204-157-26.compute-1.amazonaws.com:5432/d3egrk3ln1415p'
 db = SQLAlchemy(app)
 
 class User(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   username = db.Column(db.String(20), unique=True, nullable=False)
-  password = db.Column(db.String(60), nullable=False)
+  password = db.Column(db.String(255), nullable=False)
   comments = db.relationship("Comment", backref="user", lazy=True)
   reviews = db.relationship("Review", backref="user", lazy=True)
   def __repr__(self):
@@ -49,7 +49,7 @@ class Review(db.Model):
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     response = db.Column(db.Text())
-    review_id = db.Column(db.String(50), db.ForeignKey('review.id'), 
+    review_id = db.Column(db.Integer, db.ForeignKey('review.id'), 
         nullable=False)
     username = db.Column(db.String(20), db.ForeignKey('user.username'), 
         nullable=False)
@@ -118,7 +118,7 @@ def register():
     form = RegistrationForm()
     existing_users_with_username = User.query.filter_by(username=form.username.data).all()
     if form.validate_on_submit() and len(existing_users_with_username) == 0: # checks if entries are valid
-        pw_hash = bcrypt.generate_password_hash(form.password.data)
+        pw_hash = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, password=pw_hash)
         db.session.add(user)
         db.session.commit() 
