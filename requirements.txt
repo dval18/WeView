@@ -13,4 +13,5 @@ pytest
 pycodestyle
 pandas
 requests
+psycopg2
 flask_bcrypt
