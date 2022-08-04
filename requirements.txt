@@ -48,8 +48,8 @@ protobuf==3.17.3
 py==1.10.0
 pycodestyle==2.9.0
 pycparser==2.21
-pycrypto==2.6.1
-PyGObject==3.26.1
+pycrypto
+PyGObject
 pyparsing==2.4.7
 pytest==6.2.4
 python-apt==1.6.5+ubuntu0.7
