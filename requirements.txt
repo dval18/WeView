@@ -11,7 +11,7 @@ configparser==5.0.2
 crayons==0.4.0
 cryptography==2.1.4
 cycler
-dataclasses==0.6
+dataclasses==0.5
 distutils
 dnspython==2.1.0
 email-validator==1.1.3
