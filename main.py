@@ -167,13 +167,11 @@ def read():
             db.session.commit()
             comments = Comment.query.filter_by(review_id=review.id).all()
             flash(f'Review posted!', 'success')
-            if review.username == session['username']:
-                return render_template('read_review.html', user=session['username'], review=review, form=comment_form, comments=comments)
-            else:
-                return render_template('read_review.html', user=session['username'], review=review, form=comment_form, comments=comments)
+
+            return render_template('read_review.html', user=session['username'], review=review, form=comment_form, num_comments=len(comments), comments=comments)
         else:    
             comments = Comment.query.filter_by(review_id=review.id).all()
-            return render_template('read_review.html', user=session['username'], review=review, form=comment_form, comments=comments)
+            return render_template('read_review.html', user=session['username'], review=review, form=comment_form, num_comments=len(comments), comments=comments)
     else:
         return render_template('error_after_login.html', error_message='Invalid Input', error_text='Invalid or no ID entered')
 
