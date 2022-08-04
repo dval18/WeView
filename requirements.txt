@@ -69,10 +69,10 @@ toml==0.10.2
 Turbo-Flask==0.6.0
 typing-extensions
 ubuntu-advantage-tools
-unattended-upgrades==0.1
-urllib3==1.22
-webdriver-manager==3.4.2
-Werkzeug==2.0.1
-wsproto==1.0.0
-WTForms==2.3.3
-zipp==3.4.1
+unattended-upgrades
+urllib3
+webdriver-manager
+Werkzeug
+wsproto
+WTForms
+zipp
