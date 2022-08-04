@@ -19,7 +19,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SECRET_KEY'] = '0336defeb890bb7bac96671c768bda2e'
 #app.config['SECRET_KEY'] = '0cff8064643810cf406057022287b4c5'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = ''
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db' #when pushing to heroku get the db uri
 db = SQLAlchemy(app)
 
 class User(db.Model):
