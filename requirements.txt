@@ -67,8 +67,8 @@ SQLAlchemy==1.4.19
 ssh-import-id
 toml==0.10.2
 Turbo-Flask==0.6.0
-typing-extensions==3.10.0.0
-ubuntu-advantage-tools==27.9
+typing-extensions
+ubuntu-advantage-tools
 unattended-upgrades==0.1
 urllib3==1.22
 webdriver-manager==3.4.2
