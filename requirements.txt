@@ -2,10 +2,5 @@ flask
 flask_behind_proxy
 flask_sqlalchemy
 flask_bcrypt
-functools
-random
-requests
-os
-bcrypt
 flask_wtf
 wtforms
