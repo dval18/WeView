@@ -14,8 +14,18 @@
             <li class="nav-item">
                 <a class="nav-link" href="/reviews">Reviews</a>
             </li>
+        </ul>
+        <ul class="navbar-nav ml-auto mb-2 mb-md-0">
             <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout {{ user }}</a>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ user }}
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/logout">Sign Out</a>
+                        <a class="dropdown-item" href="/profile">Profile</a>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
@@ -41,21 +51,54 @@
                 </div>
                 <div class="col"></div>
             </div>
-            <div class="row" style="padding-top:5vh">
+            <div class="row" style="padding-top:5vh; padding-bottom:0vh">
                 <div class="col"></div>
                 <div class="col-9">
                     <p>{{ review.response }}</p>
                 </div>
                 <div class="col"></div>
             </div>
+            <div class="row">
+                <br />
+            </div>
+            <p class="text-right" style="margin-bottom:0vh"><b><a class="text-success" href="#comment">Add a Comment</a></b></p>
         </div>  
     </div>
     <div class="col"></div>
 </div>
+
 <div class="row">
     <div class="col"></div>
     <div class="col-7">
         <div class="jumbotron text-center bg-white" style="border:1px solid green; padding-bottom:0vh; padding-top:5vh">
+            <h5 class="text-success text-left"><b>{{ num_comments }} comments: </b></h5>
+            <br />
+            {% for comment in comments %}
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col-10">
+                        <div class="jumbotron text-center bg-white" style="border:1px solid green; padding:0vh;">
+                            {% if review.username == comment.username %}
+                                <div class="row">
+                                    <div class="col-4"><b>Original Poster</b></div>
+                                    <div class="col" style="text-align:left">{{ comment.response }}</div>
+                                </div>
+                            {% else %}
+                                <div class="row">
+                                    <div class="col-4"></div>
+                                    <div class="col" style="text-align:left">
+                                        {{ comment.response }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div id="comment" class="jumbotron text-center bg-white" style="border:1px solid green; padding-bottom:0vh; padding-top:5vh">
             <div class="row">
                 <div class="col"></div>
                 <div class="col-10">
@@ -86,29 +129,6 @@
                 </div>
                 <div class="col"></div>
             </div>
-            {% for comment in comments %}
-                <div class="row">
-                    <div class="col"></div>
-                    <div class="col-10">
-                        <div class="jumbotron text-center bg-white" style="border:1px solid green; padding:0vh;">
-                            {% if review.username == comment.username %}
-                                <div class="row">
-                                    <div class="col-4"><b>Original Poster</b></div>
-                                    <div class="col" style="text-align:left">{{ comment.response }}</div>
-                                </div>
-                            {% else %}
-                                <div class="row">
-                                    <div class="col-4"></div>
-                                    <div class="col" style="text-align:left">
-                                        {{ comment.response }}
-                                    </div>
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="col"></div>
-                </div>
-            {% endfor %}
         </div>
     </div>
     <div class="col"></div>
