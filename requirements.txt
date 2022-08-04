@@ -12,4 +12,5 @@ flask_sqlalchemy
 pytest
 pycodestyle
 pandas
+requests
 flask_bcrypt
