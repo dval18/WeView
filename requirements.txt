@@ -49,7 +49,6 @@ py==1.10.0
 pycodestyle==2.9.0
 pycparser==2.21
 pycrypto
-PyGObject
 pyparsing==2.4.7
 pytest
 python-dateutil==2.8.1
