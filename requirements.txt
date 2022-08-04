@@ -1,7 +1,6 @@
 flask
 flask_behind_proxy
 flask_sqlalchemy
-forms
 flask_bcrypt
 functools
 random
