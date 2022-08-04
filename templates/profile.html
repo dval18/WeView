@@ -1,7 +1,8 @@
 {% extends "layout_for_after_login.html" %}
 {% block title %}
-<title>{{ username }} - WeView</title>
+<title>{{ user }} - WeView</title>
 {% endblock %}
+
 {% block navbar %}
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <div class="container-fluid">
@@ -13,8 +14,17 @@
             <li class="nav-item">
                 <a class="nav-link" href="/reviews">Reviews</a>
             </li>
+        </ul>
+        <ul class="navbar-nav ml-auto mb-2 mb-md-0">
             <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout {{ username }}</a>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ user }}
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/logout">Sign Out</a>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
@@ -23,47 +33,59 @@
 {% endblock %}
 {% block content %}
 <div class="jumbotron text-center">
-    <h1>{{ username }}'s Profile Page</h1>
+    <h1>{{ user }}'s Profile Page</h1>
 </div>
-<div class="container">
-    <div class="container">
-        <h3>My Reviews </h3>
-        {% for data in reviews %}
-            <div class="row h-100">
-                <div class="col my-3"></div>
-                    <div class="col-8 bg-light shadow p-3 mb-5 border border-secondary">
-                        <b>
-                            <h4>
-                                <a href="/read?id={{data.id}}" class="text-success">
-                                    {{data.title}}
-                                </a>
-                            </h4>
-                        </b>
-                        <p style="text-align:left">Company: {{data.company_id}}</p>
-                        <p style="text-align:right">Job Title: {{data.job_title}}</p>
-                    </div>
-                <div class="col"></div>
+<div class="container align-items-center">
+    <div class="row">
+        <div class="col-9 my-4 mx-auto">
+            <div class="list-group list-group-horizontal text-center" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action list-group-item-light active" id="list-review-list" data-toggle="list" href="#list-review" role="tab" aria-controls="review"><h3>My Reviews</h3></a>
+                <a class="list-group-item list-group-item-action list-group-item-light" id="list-comment-list" data-toggle="list" href="#list-comment" role="tab" aria-controls="comment"><h3>My Comments</h3></a>
             </div>
-        {% endfor %}
+        </div>
     </div>
-    <div class="container">
-        <h3>My Comments</h3>
-        {% for data in comments %}
-            <div class="row h-100">
-                <div class="col my-3"></div>
-                    <div class="col-8 bg-light shadow p-3 mb-5 border border-secondary">
-                        <p> {{ data.response }}</p>
-                        <b>
-                            <p>
-                                <a href="/read?id={{data.review_id}}" class="text-success">
-                                    Click here to check out the review
-                                </a>
-                            <p>
-                        </b>
+    <div class="row">
+        <div class="container">
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="list-review" role="tabpanel" aria-labelledby="list-review-list">
+                {% for data in reviews %}
+                    <div class="row h-100">
+                        <div class="col my-3"></div>
+                            <div class="col-8 bg-light shadow p-3 mb-5 border border-secondary">
+                                <b>
+                                    <h4>
+                                        <a href="/read?id={{data.id}}" class="text-success">
+                                            {{data.title}}
+                                        </a>
+                                    </h4>
+                                </b>
+                                <p style="text-align:left">Company: {{data.company_id}}</p>
+                                <p style="text-align:right">Job Title: {{data.job_title}}</p>
+                            </div>
+                        <div class="col"></div>
                     </div>
-                <div class="col"></div>
+                {% endfor %}
             </div>
-        {% endfor %}
+            <div class="tab-pane fade" id="list-comment" role="tabpanel" aria-labelledby="list-comment-list">
+                {% for data in comments %}
+                    <div class="row h-100">
+                        <div class="col my-3"></div>
+                            <div class="col-8 bg-light shadow p-3 mb-5 border border-secondary">
+                                <p> {{ data.response }}</p>
+                                <b>
+                                    <p>
+                                        <a href="/read?id={{data.review_id}}" class="text-success">
+                                            Click here to check out the review
+                                        </a>
+                                    <p>
+                                </b>
+                            </div>
+                        <div class="col"></div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        </div>
     </div>
 </div>
     <!--FOOTER-->
