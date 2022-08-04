@@ -118,7 +118,7 @@ def register():
     form = RegistrationForm()
     existing_users_with_username = User.query.filter_by(username=form.username.data).all()
     if form.validate_on_submit() and len(existing_users_with_username) == 0: # checks if entries are valid
-        pw_hash = bcrypt.generate_password_hash(form.password.data)
+        pw_hash = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, password=pw_hash)
         db.session.add(user)
         db.session.commit() 
