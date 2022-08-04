@@ -192,9 +192,12 @@ def reviews():
 
     if form.validate_on_submit():
         reviews = Review.query.filter_by(company_id=form.select.data).all()
-        img = clearbitInformation(form.select.data)
-        img_info = img["logo"]
-        return render_template('reviews.html', user=session['username'], form=form, reviews=reviews, title=f'{form.select.data} Reviews', img_url=img_info)
+        company = clearbitInformation(form.select.data)
+        img_info = company["logo"]
+        desc = company["description"]
+        linkedin = company["linkedin"]
+        domain = company["domain"]
+        return render_template('reviews.html', user=session['username'], form=form, domain=domain, reviews=reviews, title=f'{form.select.data} Reviews', img_url=img_info, description=desc, linkedin=linkedin)
 
     return render_template('reviews.html', user=session['username'], form=form, reviews=all_revs, title="All Reviews", img_url="../static/styles/images/logo_dark.jpeg")
 
