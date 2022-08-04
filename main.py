@@ -167,7 +167,7 @@ def read():
             db.session.commit()
             comments = Comment.query.filter_by(review_id=review.id).all()
             flash(f'Review posted!', 'success')
-
+            comment_form.text.data=""
             return render_template('read_review.html', user=session['username'], review=review, form=comment_form, num_comments=len(comments), comments=comments)
         else:    
             comments = Comment.query.filter_by(review_id=review.id).all()
