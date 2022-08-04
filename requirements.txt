@@ -68,7 +68,6 @@ ssh-import-id
 toml==0.10.2
 Turbo-Flask==0.6.0
 typing-extensions
-ubuntu-advantage-tools
 unattended-upgrades
 urllib3
 webdriver-manager
