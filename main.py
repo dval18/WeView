@@ -110,7 +110,7 @@ def post():
 @login_required
 def profile():
     user = User.query.filter_by(username=session['username']).first()
-    return render_template('profile.html', username=user.username, reviews=user.reviews, comments=user.comments)
+    return render_template('profile.html', user=user.username, reviews=user.reviews, comments=user.comments)
 
 @app.route("/register", methods=['GET', 'POST'])
 @is_logged_in
