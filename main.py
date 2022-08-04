@@ -49,7 +49,7 @@ class Review(db.Model):
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     response = db.Column(db.Text())
-    review_id = db.Column(db.String(50), db.ForeignKey('review.id'), 
+    review_id = db.Column(db.Integer, db.ForeignKey('review.id'), 
         nullable=False)
     username = db.Column(db.String(20), db.ForeignKey('user.username'), 
         nullable=False)
@@ -59,7 +59,7 @@ class Comment(db.Model):
         return str(response)
 
 class Company(db.Model):
-    id = db.Column(db.String(50), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     reviews = db.relationship("Review", backref="company", lazy=True)
 
 def login_required(func):
