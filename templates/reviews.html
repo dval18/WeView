@@ -3,13 +3,16 @@
 <title>Reviews</title>
 {% endblock %}
 {% block navbar %}
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="/home">
       <img src="static/styles/images/small_logo.png" alt="logo" width="80px" height="30px" class="d-inline-block align-top">
     </a>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto mb-2 mb-md-0">
+            <li class="nav-item">
+                <b><a class="nav-link text-success" href="/post">Post a Review</a></b>
+            </li>
             <li class="nav-item">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -21,11 +24,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item">
-                <b><a class="nav-link text-success" href="/post">Post a Review</a></b>
-            </li>
         </ul>
-        
     </div>
 </div>
 </nav>
@@ -36,8 +35,20 @@
             <div class="col-4">
                 <img src="{{ img_url }}" alt="{{ title }} logo url: {{ img_url }}" style="mix-blend-mode:multiply; max-height:100vh; max-width:15vw"></img>
             </div>
-            <div class="col-4"><h1 class="display-light">{{ title }}</h1></div>
-            <div class="col-4"></div>
+            <div class="col-4">
+                <h1 class="display-light">{{ title }}</h1>
+            </div>
+            <div class="col-4">
+                {% if description %}
+                    <p style="text-align:left">Description: {{ description }}</p>
+                {% endif %}
+                {% if linkedin and linkedin != "None provided" %}
+                    <p style="text-align:left">LinkedIn: {{ linkedin }}</p>
+                {% endif %}
+                {% if domain %}
+                    <p style="text-align:left"><a href="https://{{ domain }}">Website</a></p>
+                {% endif %}
+            </div>
         </div>
     </div>  
     <div class="container">
