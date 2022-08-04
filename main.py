@@ -19,7 +19,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SECRET_KEY'] = '0336defeb890bb7bac96671c768bda2e'
 #app.config['SECRET_KEY'] = '0cff8064643810cf406057022287b4c5'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://dmwoungxyevtki:df8dfd830957227ab0eb8ba2b03efee4223d2d7c10d4f067c3b07aa277194b8b@ec2-52-204-157-26.compute-1.amazonaws.com:5432/d3egrk3ln1415p'
+app.config['SQLALCHEMY_DATABASE_URI'] = ''
 db = SQLAlchemy(app)
 
 class User(db.Model):
